@@ -14,11 +14,11 @@
     header {
       background-color: #195082;
       color: white;
-      text-align: center;
       padding: 20px 10px;
       position: sticky;
       top: 0;
       z-index: 1000;
+      text-align: center;
     }
 
     header img {
@@ -135,9 +135,9 @@
     const logo = document.getElementById('logo');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 100) {
-        logo.src = 'logo2.png';
+        logo.src = 'logo2.png'; // le logo horizontal
       } else {
-        logo.src = 'logo1.png';
+        logo.src = 'logo1.png'; // le logo principal
       }
     });
   </script>

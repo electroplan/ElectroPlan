@@ -1,168 +1,246 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ElectroPlan</title>
-  <link rel="icon" href="foto2.PNG" type="image/png">
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #FFFFFF;
+      background: white;
       color: #002F5F;
     }
 
     header {
+      position: sticky;
+      top: 0;
+      background: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      z-index: 1000;
+      border-bottom: 2px solid #FBC02D;
+    }
+
+    .logo {
+      height: 40px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle {
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background: #002F5F;
+      margin: 4px 0;
+      transition: 0.4s;
+    }
+
+    nav {
+      display: none;
+      flex-direction: column;
       position: fixed;
       top: 0;
-      width: 100%;
-      background: #FFFFFF;
-      display: flex;
+      right: 0;
+      width: 250px;
+      height: 100%;
+      background: white;
+      box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+      padding: 20px;
+      z-index: 1001;
+    }
+
+    nav a {
+      margin: 15px 0;
+      text-decoration: none;
+      color: #002F5F;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    nav .close-btn {
+      font-size: 24px;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      cursor: pointer;
+    }
+
+    .languages {
+      margin-top: auto;
+      padding-top: 30px;
+      border-top: 1px solid #ccc;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
       justify-content: center;
       align-items: center;
-      height: 130px;
-      transition: all 0.3s ease;
-      z-index: 1000;
-      border-bottom: 1px solid #eee;
+      z-index: 2000;
     }
 
-    header.scrolled {
-      height: 80px;
+    .popup-content {
+      background: white;
+      padding: 25px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      position: relative;
     }
 
-    #logo {
-      max-height: 110px;
-      transition: all 0.3s ease;
+    .popup-content h2 {
+      margin-top: 0;
     }
 
-    header.scrolled #logo {
-      max-height: 60px;
+    .popup-content label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
     }
 
-    .spacer {
-      height: 140px;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 20px;
-    }
-
-    h1, h2 {
-      color: #002F5F;
-    }
-
-    table {
+    .popup-content input,
+    .popup-content select,
+    .popup-content textarea {
       width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      background: #F9F9F9;
-    }
-
-    th, td {
-      padding: 12px;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 4px;
       border: 1px solid #ccc;
-      text-align: left;
     }
 
-    th {
+    .popup-content button {
+      margin-top: 15px;
+      padding: 10px 15px;
       background: #FBC02D;
       color: #002F5F;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
     }
 
-    .testimonial {
-      margin-top: 40px;
-      background: #FEFEFE;
-      padding: 20px;
-      border-left: 5px solid #FBC02D;
+    .popup-content .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+      cursor: pointer;
     }
 
-    .whatsapp {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 999;
-    }
-
-    .whatsapp img {
-      width: 60px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #FBC02D;
-      color: #002F5F;
-      margin-top: 40px;
-    }
   </style>
 </head>
 
 <body>
+
+  <!-- HEADER -->
   <header>
-    <img id="logo" src="foto1.PNG" alt="ElectroPlan">
+    <a href="#"><img id="logo" class="logo" src="foto1.PNG" alt="Logo ElectroPlan"></a>
+    <div class="menu-toggle" onclick="openMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </header>
 
-  <div class="spacer"></div>
+  <!-- MENU -->
+  <nav id="nav-menu">
+    <span class="close-btn" onclick="closeMenu()">&times;</span>
+    <a href="#tarifs">Tarifs</a>
+    <a href="#aide">Aide</a>
+    <a href="#apropos">À propos</a>
+    <a href="#" onclick="openPopup(); closeMenu()">Commander</a>
+    <div class="languages">
+      Arabe - Français - Anglais - Espagnol
+    </div>
+  </nav>
 
-  <div class="container">
+  <!-- CONTENU -->
+  <section style="padding: 40px;">
     <h1>Bienvenue chez ElectroPlan</h1>
-    <p>Des plans électriques personnalisés, avec schémas, visualisation 2D/3D, tableau électrique et contrôle moteur – livrés rapidement et avec professionnalisme 🇲🇦 🇪🇸 🇦🇪</p>
+    <p>Création de plans électriques professionnels avec visualisation 2D/3D.</p>
+  </section>
 
-    <h2>Nos services</h2>
-    <table>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-        <th>Prix (MAD)</th>
-      </tr>
-      <tr>
-        <td>Logement</td>
-        <td>Plan + schémas + tableau électrique</td>
-        <td>500 DH</td>
-      </tr>
-      <tr>
-        <td>Appartement / Villa</td>
-        <td>Visualisation + tableau électrique + contrôle moteur</td>
-        <td>300 DH</td>
-      </tr>
-      <tr>
-        <td>Magasin</td>
-        <td>Plan complet + simulation 3D + optimisation</td>
-        <td>280 DH</td>
-      </tr>
-    </table>
+  <!-- POPUP -->
+  <div id="commande-popup" class="popup">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup()">&times;</span>
+      <h2>Commander un plan</h2>
+      <form onsubmit="envoyerWhatsApp(event)">
+        <label>Nom :</label>
+        <input type="text" id="nom" required>
 
-    <div class="testimonial">
-      <strong>✨ Témoignage client (Danemark – Handyhand) :</strong>
-      <p>“Service au top ! Très pro, ponctuel, avec un travail propre et rapide. Merci Abdelali 👏”</p>
+        <label>Email :</label>
+        <input type="email" id="email" required>
+
+        <label>Type de plan :</label>
+        <select id="type">
+          <option>Appartement</option>
+          <option>Villa</option>
+          <option>Magasin</option>
+          <option>Terrain</option>
+        </select>
+
+        <label>Message :</label>
+        <textarea id="message" placeholder="Décrivez votre besoin..."></textarea>
+
+        <button type="submit">Envoyer sur WhatsApp</button>
+      </form>
     </div>
   </div>
 
-  <div class="whatsapp">
-    <a href="https://wa.me/212635978858" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="Contact WhatsApp">
-    </a>
-  </div>
-
-  <footer>
-    © 2025 ElectroPlan – Plans électriques professionnels 🇲🇦 🇪🇸 🇦🇪
-  </footer>
-
+  <!-- SCRIPT -->
   <script>
-    window.addEventListener('scroll', function () {
-      const header = document.querySelector('header');
-      const logo = document.querySelector('#logo');
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
+    function openMenu() {
+      document.getElementById("nav-menu").style.display = "flex";
+    }
+
+    function closeMenu() {
+      document.getElementById("nav-menu").style.display = "none";
+    }
+
+    function openPopup() {
+      document.getElementById("commande-popup").style.display = "flex";
+    }
+
+    function closePopup() {
+      document.getElementById("commande-popup").style.display = "none";
+    }
+
+    function envoyerWhatsApp(event) {
+      event.preventDefault();
+      const nom = document.getElementById("nom").value;
+      const email = document.getElementById("email").value;
+      const type = document.getElementById("type").value;
+      const message = document.getElementById("message").value;
+
+      const texte = `Bonjour, je m'appelle ${nom} (${email}) et je souhaite commander un plan pour une ${type}. Voici mon message : ${message}`;
+      const lien = `https://wa.me/212635978858?text=${encodeURIComponent(texte)}`;
+      window.open(lien, "_blank");
+    }
+
+    // 🔁 Changement de logo au scroll
+    window.addEventListener('scroll', function() {
+      const logo = document.getElementById('logo');
+      if (window.scrollY > 80) {
         logo.src = 'foto2.PNG';
       } else {
-        header.classList.remove('scrolled');
         logo.src = 'foto1.PNG';
       }
     });
   </script>
+
 </body>
 </html>

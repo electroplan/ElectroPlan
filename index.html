@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ElectroPlan</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+  <link rel="icon" type="image/png" href="foto1.PNG" />
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header id="header">
+    <a href="#accueil" class="logo-link">
+      <img id="logo" src="foto1.PNG" alt="Logo ElectroPlan" />
+    </a>
+    <nav>
+      <ul id="nav-links">
+        <li><a href="#tarifs" data-i18n="tarifs">Nos Tarifs</a></li>
+        <li><a href="#apropos" data-i18n="apropos">À propos</a></li>
+        <li><a href="#commander" data-i18n="commander">Commander</a></li>
+        <li class="lang-switcher">
+          <select id="langSelect">
+            <option value="fr">Français</option>
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="ar">العربية</option>
+          </select>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="accueil">
+      <h1 data-i18n="titre">Création de plans électriques sur mesure</h1>
+      <a href="#commander" class="btn" data-i18n="btnCommander">Commander</a>
+      <div class="features">
+        <div><i class="fas fa-clock"></i><p data-i18n="sous72h">Prêt sous 72h</p></div>
+        <div><i class="fas fa-edit"></i><p data-i18n="modif30j">Modifications jusqu’à 30 jours</p></div>
+        <div><i class="fas fa-file-pdf"></i><p data-i18n="pdf">Avec rapports PDF</p></div>
+      </div>
+    </section>
+
+    <section id="tarifs">
+      <h2 data-i18n="tarifs">Nos Tarifs</h2>
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="service">Service</th>
+            <th data-i18n="description">Description</th>
+            <th>Prix (DH)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-i18n="dossier">Dossier complet</td>
+            <td data-i18n="desc1">Plans + schémas + tableaux + moteur</td>
+            <td>500</td>
+          </tr>
+          <tr>
+            <td data-i18n="simple">Simple installation</td>
+            <td data-i18n="desc2">Schéma seul avec tableau</td>
+            <td>300</td>
+          </tr>
+          <tr>
+            <td data-i18n="moteur">Moteur</td>
+            <td data-i18n="desc3">Contrôle moteur seul</td>
+            <td>280</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="apropos">
+      <h2 data-i18n="apropos">À propos de nous</h2>
+      <p data-i18n="texteApropos">
+        ElectroPlan est spécialisé dans la création de plans électriques professionnels avec visualisation 2D/3D pour logements, projets tertiaires et industriels. Nous intervenons au Maroc, à Dubaï et en Espagne.
+      </p>
+    </section>
+
+    <section id="commander">
+      <h2 data-i18n="formTitle">Commander maintenant</h2>
+      <form onsubmit="envoyerWhatsApp(event)">
+        <input type="text" id="nom" placeholder="Nom" required />
+        <input type="text" id="service" placeholder="Service souhaité" required />
+        <textarea id="message" placeholder="Message ou besoin spécifique"></textarea>
+        <button type="submit" class="btn" data-i18n="envoyer">Envoyer via WhatsApp</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>

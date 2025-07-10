@@ -1,52 +1,86 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ElectroPlan</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      background-color: #f8f9fa;
+      padding: 0;
+      background-color: #f4f4f4;
     }
     header {
-      background-color: #003366;
+      background-color: #004080;
       color: white;
       padding: 20px 0;
       text-align: center;
     }
     header img {
-      display: block;
-      margin: 0 auto 10px;
-      max-width: 120px;
+      max-height: 80px;
     }
     section {
       padding: 20px;
     }
-    h1, h2 {
-      color: #003366;
+    h2 {
+      color: #004080;
     }
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
     }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
     th, td {
-      padding: 12px;
-      border: 1px solid #ddd;
+      padding: 10px;
       text-align: left;
     }
     th {
-      background-color: #003366;
+      background-color: #ffcc00;
+    }
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25d366;
       color: white;
+      border-radius: 50%;
+      padding: 15px;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+      text-align: center;
+      font-size: 24px;
+      z-index: 100;
+      text-decoration: none;
+    }
+    .whatsapp-float:hover {
+      background-color: #128c7e;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    ul li {
+      background-color: #e9e9e9;
+      margin: 10px 0;
+      padding: 10px;
+      border-left: 5px solid #004080;
+    }
+    a {
+      color: #004080;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
 
 <header>
-  <img src="logo.png" alt="Logo ElectroPlan">
+  <img src="logo.png" alt="Logo ElectroPlan" />
   <h1>Des plans électriques intelligents, précis et accessibles</h1>
 </header>
 
@@ -65,26 +99,44 @@
     </tr>
     <tr>
       <td>Dossier complet logement</td>
-      <td>Plan + schéma unifilaire + tableau électrique + moteur</td>
-      <td>500 DH</td>
-    </tr>
-    <tr>
-      <td>Schéma multifilaire</td>
-      <td>Schéma détaillé de l’installation</td>
-      <td>100 DH</td>
+      <td>Plans + schémas + tableaux électriques + contrôle moteur</td>
+      <td>500 dh</td>
     </tr>
     <tr>
       <td>Schéma unifilaire</td>
-      <td>Plan simple des circuits</td>
-      <td>70 DH</td>
+      <td>Schéma électrique simple ligne</td>
+      <td>150 dh</td>
     </tr>
     <tr>
-      <td>Visualisation 2D/3D</td>
-      <td>Projection visuelle du plan</td>
-      <td>150 DH</td>
+      <td>Schéma multifilaire</td>
+      <td>Schéma complet avec plusieurs circuits</td>
+      <td>200 dh</td>
+    </tr>
+    <tr>
+      <td>Accompagnement</td>
+      <td>Conseils et suivi jusqu'à la réalisation</td>
+      <td>350 dh</td>
     </tr>
   </table>
 </section>
+
+<section>
+  <h2>Contact</h2>
+  <p>📞 Téléphone / WhatsApp : <a href="https://wa.me/212635978858">+212 635-978858</a></p>
+  <p>📧 Email : contact@electroplan.com</p>
+  <p>🌐 Instagram : @electroplan.pro</p>
+</section>
+
+<section>
+  <h2>Avis clients</h2>
+  <ul>
+    <li>⭐⭐⭐⭐⭐ – “Service rapide et professionnel. Je recommande vivement !” – Yassine (Maroc)</li>
+    <li>⭐⭐⭐⭐⭐ – “Très satisfait des schémas et du suivi du projet.” – Maria (Espagne)</li>
+    <li>⭐⭐⭐⭐⭐ – “L’accompagnement était parfait. Merci à l’équipe ElectroPlan.” – Khalid (Dubaï)</li>
+  </ul>
+</section>
+
+<a class="whatsapp-float" href="https://wa.me/212635978858" target="_blank" title="Assistance WhatsApp">💬</a>
 
 </body>
 </html>

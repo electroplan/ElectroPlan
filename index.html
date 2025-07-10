@@ -2,92 +2,383 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ElectroPlan</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
-  <link rel="icon" type="image/png" href="foto1.PNG" />
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bleu: #184e7d;
+      --orange: #f28c00;
+      --blanc: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--blanc);
+      color: var(--bleu);
+      scroll-behavior: smooth;
+      animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background: var(--blanc);
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      transition: 0.3s;
+      border-bottom: 2px solid var(--orange);
+    }
+
+    header.scrolled img {
+      height: 30px !important;
+    }
+
+    header img {
+      height: 50px;
+      transition: height 0.3s ease;
+      cursor: pointer;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--bleu);
+      font-weight: bold;
+    }
+
+    .lang-switcher button {
+      margin-left: 10px;
+      border: none;
+      background: transparent;
+      color: var(--bleu);
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .menu-btn {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .menu-btn span {
+      height: 4px;
+      width: 25px;
+      background: var(--bleu);
+      margin: 3px;
+    }
+
+    .hero {
+      padding-top: 100px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .hero button {
+      background: var(--orange);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .features {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .features .item {
+      text-align: center;
+    }
+
+    .features i {
+      font-size: 40px;
+      color: var(--orange);
+    }
+
+    section {
+      padding: 30px 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th {
+      background: var(--orange);
+      color: white;
+      padding: 10px;
+    }
+
+    td {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: var(--bleu);
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        background: var(--blanc);
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 200px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+
+      nav.open {
+        display: flex;
+      }
+
+      .menu-btn {
+        display: flex;
+      }
+    }
+  </style>
 </head>
 <body>
   <header id="header">
-    <a href="#accueil" class="logo-link">
-      <img id="logo" src="foto1.PNG" alt="Logo ElectroPlan" />
-    </a>
-    <nav>
-      <ul id="nav-links">
-        <li><a href="#tarifs" data-i18n="tarifs">Nos Tarifs</a></li>
-        <li><a href="#apropos" data-i18n="apropos">À propos</a></li>
-        <li><a href="#commander" data-i18n="commander">Commander</a></li>
-        <li class="lang-switcher">
-          <select id="langSelect">
-            <option value="fr">Français</option>
-            <option value="en">English</option>
-            <option value="es">Español</option>
-            <option value="ar">العربية</option>
-          </select>
-        </li>
-      </ul>
+    <img src="foto1.PNG" id="logo" onclick="scrollToTop()" />
+    <div class="menu-btn" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+    <nav id="nav">
+      <a href="#tarifs" data-i18n="tarifs">Nos Tarifs</a>
+      <a href="#apropos" data-i18n="apropos">À propos</a>
+      <a href="#commander" data-i18n="commander">Commander</a>
+      <div class="lang-switcher">
+        <button onclick="setLang('fr')">FR</button>
+        <button onclick="setLang('en')">EN</button>
+        <button onclick="setLang('es')">ES</button>
+        <button onclick="setLang('ar')">AR</button>
+      </div>
     </nav>
   </header>
 
-  <main>
-    <section id="accueil">
-      <h1 data-i18n="titre">Création de plans électriques sur mesure</h1>
-      <a href="#commander" class="btn" data-i18n="btnCommander">Commander</a>
-      <div class="features">
-        <div><i class="fas fa-clock"></i><p data-i18n="sous72h">Prêt sous 72h</p></div>
-        <div><i class="fas fa-edit"></i><p data-i18n="modif30j">Modifications jusqu’à 30 jours</p></div>
-        <div><i class="fas fa-file-pdf"></i><p data-i18n="pdf">Avec rapports PDF</p></div>
+  <div class="hero">
+    <h1 data-i18n="hero_title">Création de plans électriques sur mesure</h1>
+    <button onclick="document.getElementById('commander').scrollIntoView()" data-i18n="order_btn">Commander</button>
+
+    <div class="features">
+      <div class="item">
+        <i class="fas fa-clock"></i>
+        <p data-i18n="delai">Prêt sous 72h</p>
       </div>
-    </section>
+      <div class="item">
+        <i class="fas fa-pen"></i>
+        <p data-i18n="modif">Modifications jusqu'à 30 jours</p>
+      </div>
+      <div class="item">
+        <i class="fas fa-file-pdf"></i>
+        <p data-i18n="rapport">Avec rapports PDF</p>
+      </div>
+    </div>
+  </div>
 
-    <section id="tarifs">
-      <h2 data-i18n="tarifs">Nos Tarifs</h2>
-      <table>
-        <thead>
-          <tr>
-            <th data-i18n="service">Service</th>
-            <th data-i18n="description">Description</th>
-            <th>Prix (DH)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td data-i18n="dossier">Dossier complet</td>
-            <td data-i18n="desc1">Plans + schémas + tableaux + moteur</td>
-            <td>500</td>
-          </tr>
-          <tr>
-            <td data-i18n="simple">Simple installation</td>
-            <td data-i18n="desc2">Schéma seul avec tableau</td>
-            <td>300</td>
-          </tr>
-          <tr>
-            <td data-i18n="moteur">Moteur</td>
-            <td data-i18n="desc3">Contrôle moteur seul</td>
-            <td>280</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+  <section id="tarifs">
+    <h2 data-i18n="tarifs">Nos Tarifs</h2>
+    <table>
+      <tr>
+        <th data-i18n="service">Service</th>
+        <th data-i18n="desc">Description</th>
+        <th data-i18n="prix">Prix (DH)</th>
+      </tr>
+      <tr>
+        <td data-i18n="dossier">Dossier complet</td>
+        <td data-i18n="dossier_desc">Plans + schémas + tableaux + moteur</td>
+        <td>500</td>
+      </tr>
+      <tr>
+        <td data-i18n="simple">Simple installation</td>
+        <td data-i18n="simple_desc">Schéma seul avec tableau</td>
+        <td>300</td>
+      </tr>
+      <tr>
+        <td data-i18n="moteur">Moteur</td>
+        <td data-i18n="moteur_desc">Contrôle moteur seul</td>
+        <td>280</td>
+      </tr>
+    </table>
+  </section>
 
-    <section id="apropos">
-      <h2 data-i18n="apropos">À propos de nous</h2>
-      <p data-i18n="texteApropos">
-        ElectroPlan est spécialisé dans la création de plans électriques professionnels avec visualisation 2D/3D pour logements, projets tertiaires et industriels. Nous intervenons au Maroc, à Dubaï et en Espagne.
-      </p>
-    </section>
+  <section id="apropos">
+    <h2 data-i18n="apropos">À propos de nous</h2>
+    <p data-i18n="about_text">ElectroPlan est spécialisé dans la création de plans électriques professionnels avec visualisation 2D/3D pour logements, projets tertiaires et industriels. Nous intervenons au Maroc, à Dubaï et en Espagne.</p>
+  </section>
 
-    <section id="commander">
-      <h2 data-i18n="formTitle">Commander maintenant</h2>
-      <form onsubmit="envoyerWhatsApp(event)">
-        <input type="text" id="nom" placeholder="Nom" required />
-        <input type="text" id="service" placeholder="Service souhaité" required />
-        <textarea id="message" placeholder="Message ou besoin spécifique"></textarea>
-        <button type="submit" class="btn" data-i18n="envoyer">Envoyer via WhatsApp</button>
-      </form>
-    </section>
-  </main>
+  <section id="commander">
+    <h2 data-i18n="commander">Commander</h2>
+    <form onsubmit="sendWhatsApp(event)">
+      <input type="text" id="nom" placeholder="Votre nom" required><br><br>
+      <input type="text" id="service" placeholder="Service désiré" required><br><br>
+      <textarea id="details" placeholder="Détails spécifiques" required></textarea><br><br>
+      <button type="submit">Envoyer via WhatsApp</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>© 2025 ElectroPlan. Tous droits réservés.</p>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('nav').classList.toggle('open');
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      const logo = document.getElementById('logo');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+        logo.src = 'foto2.PNG';
+      } else {
+        header.classList.remove('scrolled');
+        logo.src = 'foto1.PNG';
+      }
+    });
+
+    function sendWhatsApp(e) {
+      e.preventDefault();
+      const nom = document.getElementById('nom').value;
+      const service = document.getElementById('service').value;
+      const details = document.getElementById('details').value;
+      const msg = `Bonjour, je suis ${nom} et je souhaite commander : ${service}. Détails: ${details}`;
+      const url = `https://wa.me/212612345678?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    }
+
+    const translations = {
+      fr: {
+        tarifs: "Nos Tarifs",
+        apropos: "À propos",
+        commander: "Commander",
+        hero_title: "Création de plans électriques sur mesure",
+        order_btn: "Commander",
+        delai: "Prêt sous 72h",
+        modif: "Modifications jusqu'à 30 jours",
+        rapport: "Avec rapports PDF",
+        service: "Service",
+        desc: "Description",
+        prix: "Prix (DH)",
+        dossier: "Dossier complet",
+        dossier_desc: "Plans + schémas + tableaux + moteur",
+        simple: "Simple installation",
+        simple_desc: "Schéma seul avec tableau",
+        moteur: "Moteur",
+        moteur_desc: "Contrôle moteur seul",
+        about_text: "ElectroPlan est spécialisé dans la création de plans électriques professionnels avec visualisation 2D/3D pour logements, projets tertiaires et industriels. Nous intervenons au Maroc, à Dubaï et en Espagne."
+      },
+      en: {
+        tarifs: "Pricing",
+        apropos: "About us",
+        commander: "Order",
+        hero_title: "Custom electrical plans with 2D/3D",
+        order_btn: "Order now",
+        delai: "Ready in 72h",
+        modif: "Edits allowed up to 30 days",
+        rapport: "With PDF reports",
+        service: "Service",
+        desc: "Description",
+        prix: "Price (DH)",
+        dossier: "Full Package",
+        dossier_desc: "Plans + diagrams + boards + motor",
+        simple: "Simple installation",
+        simple_desc: "Diagram only with board",
+        moteur: "Motor",
+        moteur_desc: "Motor control only",
+        about_text: "ElectroPlan specializes in professional electrical plans with 2D/3D visualization for residential, commercial and industrial projects in Morocco, Dubai and Spain."
+      },
+      es: {
+        tarifs: "Tarifas",
+        apropos: "Sobre nosotros",
+        commander: "Pedir",
+        hero_title: "Planos eléctricos personalizados",
+        order_btn: "Pedir ahora",
+        delai: "Listo en 72h",
+        modif: "Cambios hasta 30 días",
+        rapport: "Con informe PDF",
+        service: "Servicio",
+        desc: "Descripción",
+        prix: "Precio (DH)",
+        dossier: "Dossier completo",
+        dossier_desc: "Planos + esquemas + cuadros + motor",
+        simple: "Instalación simple",
+        simple_desc: "Esquema solo con cuadro",
+        moteur: "Motor",
+        moteur_desc: "Control de motor solo",
+        about_text: "ElectroPlan se especializa en planos eléctricos profesionales con visualización 2D/3D para viviendas y proyectos industriales y comerciales."
+      },
+      ar: {
+        tarifs: "الأسعار",
+        apropos: "من نحن",
+        commander: "اطلب",
+        hero_title: "تصميم مخططات كهربائية حسب الطلب",
+        order_btn: "اطلب الآن",
+        delai: "جاهز خلال 72 ساعة",
+        modif: "تعديلات حتى 30 يومًا",
+        rapport: "مع تقارير PDF",
+        service: "الخدمة",
+        desc: "الوصف",
+        prix: "السعر (DH)",
+        dossier: "ملف كامل",
+        dossier_desc: "مخططات + جداول + محرك",
+        simple: "تركيب بسيط",
+        simple_desc: "مخطط فقط مع لوحة",
+        moteur: "محرك",
+        moteur_desc: "تحكم بالمحرك فقط",
+        about_text: "ElectroPlan متخصص في إنشاء مخططات كهربائية احترافية مع تصور 2D/3D للمساكن والمشاريع الصناعية والتجارية في المغرب ودبي وإسبانيا."
+      }
+    };
+
+    function setLang(lang) {
+      const elements = document.querySelectorAll('[data-i18n]');
+      elements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) {
+          el.innerText = translations[lang][key];
+        }
+      });
+    }
+  </script>
 </body>
 </html>

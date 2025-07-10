@@ -1,86 +1,98 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ElectroPlan</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      background-color: #f5f5f5;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
     }
+
     header {
-      background-color: #003366;
+      background-color: #195082;
       color: white;
       text-align: center;
-      padding: 30px 10px;
+      padding: 20px 10px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
+
     header img {
-      width: 120px;
-      display: block;
-      margin: 0 auto 15px;
+      height: 60px;
+      transition: all 0.3s ease;
     }
+
     h1 {
-      margin: 0;
-      font-size: 24px;
+      margin: 10px 0 5px;
+      font-size: 1.5em;
     }
+
     section {
       padding: 20px;
+      max-width: 800px;
+      margin: auto;
+      background-color: white;
     }
+
     h2 {
-      color: #003366;
+      color: #195082;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 10px;
     }
+
     th, td {
       border: 1px solid #ccc;
       padding: 10px;
       text-align: left;
     }
+
     th {
-      background-color: #f9c700;
-      color: #003366;
+      background-color: #f47d20;
+      color: white;
     }
-    .whatsapp-button {
+
+    #whatsapp-button {
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background-color: #25d366;
-      color: white;
+      background-color: #25D366;
       border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      text-align: center;
-      font-size: 30px;
-      box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+      width: 55px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       z-index: 1000;
-      text-decoration: none;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
     }
-    .whatsapp-button:hover {
-      background-color: #1ebe5d;
-    }
-    .testimonial {
-      background-color: #fff;
-      border-left: 4px solid #003366;
-      padding: 15px;
-      margin: 10px 0;
+
+    #whatsapp-button img {
+      width: 30px;
     }
   </style>
 </head>
+
 <body>
 
   <header>
-    <img src="logo.PNG" alt="Logo ElectroPlan">
+    <img src="logo1.png" alt="Logo ElectroPlan" id="logo">
     <h1>Des plans électriques intelligents, précis et accessibles</h1>
   </header>
 
   <section>
     <h2>Qui sommes-nous ?</h2>
-    <p>ElectroPlan est une entreprise spécialisée dans la création de plans électriques personnalisés, la visualisation 2D/3D, les schémas professionnels et les tableaux électriques. Nous intervenons au Maroc, à Dubaï et en Espagne.</p>
+    <p>
+      ElectroPlan est une entreprise spécialisée dans la création de plans électriques personnalisés,
+      la visualisation 2D/3D, les schémas professionnels et les tableaux électriques. Nous intervenons au
+      Maroc, à Dubaï et en Espagne.
+    </p>
   </section>
 
   <section>
@@ -89,41 +101,46 @@
       <tr>
         <th>Service</th>
         <th>Description</th>
-        <th>Prix</th>
+        <th>Prix (Dhs)</th>
       </tr>
       <tr>
         <td>Dossier complet logement</td>
-        <td>Plans + schémas + tableaux électriques + contrôle moteur</td>
-        <td>Sur devis</td>
+        <td>Plans + schémas + tableaux électriques + contrôle moteur + visualisation 2D/3D</td>
+        <td>1200 Dhs</td>
       </tr>
       <tr>
-        <td>Visualisation 3D</td>
-        <td>Modélisation de votre installation électrique en 3D</td>
-        <td>À partir de 500 DKK</td>
+        <td>Visualisation 2D/3D seule</td>
+        <td>Plan simple avec rendu professionnel</td>
+        <td>500 Dhs</td>
       </tr>
       <tr>
-        <td>Plan électrique personnalisé</td>
-        <td>Plan sur mesure pour maison ou entreprise</td>
-        <td>À partir de 300 DKK</td>
+        <td>Tableaux électriques</td>
+        <td>Conception de tableaux avec protection</td>
+        <td>300 Dhs</td>
       </tr>
     </table>
   </section>
 
   <section>
-    <h2>Satisfaction de nos clients</h2>
-    <div class="testimonial">
-      ⭐⭐⭐⭐⭐ <br>
-      <strong>Fatima Z. (Casablanca)</strong> <br>
-      "Travail rapide et très professionnel. Merci à ElectroPlan pour la qualité du service."
-    </div>
-    <div class="testimonial">
-      ⭐⭐⭐⭐⭐ <br>
-      <strong>Youssef B. (Dubaï)</strong> <br>
-      "Les plans 3D étaient parfaits et m’ont beaucoup aidé à visualiser le projet."
-    </div>
+    <h2>Satisfaction client</h2>
+    <p>✅ Note moyenne : 5.0/5 — Nos clients apprécient notre ponctualité, communication et professionnalisme.</p>
   </section>
 
-  <a class="whatsapp-button" href="https://wa.me/212635978858" target="_blank">💬</a>
+  <!-- WhatsApp Button -->
+  <a id="whatsapp-button" href="https://wa.me/212635978858" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  </a>
+
+  <script>
+    const logo = document.getElementById('logo');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        logo.src = 'logo2.png';
+      } else {
+        logo.src = 'logo1.png';
+      }
+    });
+  </script>
 
 </body>
 </html>

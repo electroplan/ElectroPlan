@@ -8,348 +8,330 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #fff;
-      color: #0A2D52;
-      animation: fadeIn 1s ease-in;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffffff;
+      color: #222;
+      scroll-behavior: smooth;
     }
-    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-
     header {
       position: fixed;
       top: 0;
       width: 100%;
-      background: white;
+      background-color: #fff;
+      z-index: 1000;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.5em 1em;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      z-index: 999;
+      padding: 10px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
     }
-
-    .logo {
+    header img {
+      height: 60px;
+      transition: all 0.3s ease;
+    }
+    header.scrolled img {
       height: 40px;
-      transition: 0.3s ease;
     }
-
-    .nav-toggle {
-      font-size: 24px;
+    .menu-toggle {
+      font-size: 26px;
       cursor: pointer;
-      display: block;
-    }
-
-    nav {
-      display: none;
-      flex-direction: column;
-      align-items: flex-end;
-      background: white;
-      position: absolute;
-      top: 60px;
-      right: 0;
-      width: 100%;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    nav a {
-      padding: 1em;
-      text-decoration: none;
-      color: #0A2D52;
-    }
-
-    .lang-switcher {
-      text-align: center;
-      margin: 1em;
-    }
-
-    .lang-switcher button {
-      margin: 0 0.2em;
-      padding: 0.3em 0.6em;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 100px 20px 50px;
-    }
-
-    .hero h1 {
-      font-size: 24px;
-    }
-
-    .hero button {
-      background: #F7931E;
-      color: white;
-      padding: 12px 20px;
+      background: none;
       border: none;
-      font-size: 16px;
-      border-radius: 5px;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100%;
+      background: white;
+      z-index: 9999;
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    nav.open {
+      right: 0;
+    }
+    nav a {
+      margin: 15px;
+      font-size: 22px;
+      color: #0077cc;
+      text-decoration: none;
+    }
+    .close-menu {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 24px;
       cursor: pointer;
     }
-
+    .lang-switcher {
+      position: absolute;
+      bottom: 20px;
+      display: flex;
+      gap: 15px;
+    }
+    .hero {
+      margin-top: 80px;
+      text-align: center;
+      padding: 50px 20px;
+    }
+    .hero img {
+      max-width: 100%;
+      height: auto;
+    }
+    .hero button {
+      margin-top: 20px;
+      padding: 15px 30px;
+      background: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      cursor: pointer;
+    }
     .features {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 30px 0;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px;
+      flex-wrap: wrap;
     }
-
     .features div {
-      margin: 10px;
-      text-align: center;
-    }
-
-    .features i {
-      font-size: 30px;
-      color: #F7931E;
-      margin-bottom: 5px;
-    }
-
-    section {
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-
-    th, td {
-      padding: 12px;
-      border: 1px solid #ccc;
-      text-align: center;
-    }
-
-    th {
-      background: #F7931E;
-      color: white;
-    }
-
-    form {
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      font-size: 16px;
       gap: 10px;
     }
-
-    form input, form textarea {
-      padding: 10px;
+    .section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .pricing-table {
+      margin-top: 20px;
+      border-collapse: collapse;
+      width: 90%;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .pricing-table th, .pricing-table td {
       border: 1px solid #ccc;
+      padding: 15px;
+      font-size: 16px;
     }
-
-    form button {
-      background: #25D366;
+    .pricing-table th {
+      background: #0077cc;
       color: white;
-      padding: 10px;
-      border: none;
-      cursor: pointer;
     }
-
-    @media(min-width: 600px) {
-      nav {
-        display: flex !important;
-        flex-direction: row;
-        position: static;
-        box-shadow: none;
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 1s ease-in forwards;
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
       }
-
-      .nav-toggle {
-        display: none;
-      }
+    }
+    footer {
+      padding: 20px;
+      text-align: center;
+      background: #f0f0f0;
     }
   </style>
 </head>
 <body>
-  <header>
-    <a href="#"><img src="foto1.PNG" id="logo" class="logo" alt="Logo ElectroPlan" /></a>
-    <i class="fas fa-bars nav-toggle" onclick="toggleMenu()"></i>
-    <nav id="menu">
-      <a href="#tarifs" data-i18n="tarifs">Nos Tarifs</a>
-      <a href="#apropos" data-i18n="apropos">À propos</a>
-      <a href="#commande" data-i18n="commander">Commander</a>
-      <div class="lang-switcher">
-        <button onclick="setLang('fr')">FR</button>
-        <button onclick="setLang('en')">EN</button>
-        <button onclick="setLang('es')">ES</button>
-        <button onclick="setLang('ar')">AR</button>
-      </div>
-    </nav>
-  </header>
 
-  <main class="hero">
-    <h1 data-i18n="titre">Création de plans électriques sur mesure</h1>
-    <button onclick="document.getElementById('commande').scrollIntoView()" data-i18n="commander">Commander</button>
-  </main>
+<header id="mainHeader">
+  <a href="#"><img src="foto1.PNG" alt="ElectroPlan Logo" id="logo"/></a>
+  <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
+</header>
 
-  <div class="features">
-    <div>
-      <i class="fas fa-clock"></i>
-      <p data-i18n="feature1">Prêt sous 72h</p>
-    </div>
-    <div>
-      <i class="fas fa-pen"></i>
-      <p data-i18n="feature2">Modifications jusqu'à 30 jours</p>
-    </div>
-    <div>
-      <i class="fas fa-file-pdf"></i>
-      <p data-i18n="feature3">Avec rapports PDF</p>
-    </div>
+<nav id="menu">
+  <span class="close-menu" onclick="toggleMenu()">&times;</span>
+  <a href="#tarifs" onclick="toggleMenu()">Tarifs</a>
+  <a href="#aide" onclick="toggleMenu()">Aide</a>
+  <a href="#apropos" onclick="toggleMenu()">À propos</a>
+  <a href="#commande" onclick="toggleMenu()">Commander</a>
+  <div class="lang-switcher">
+    <button onclick="setLang('fr')">FR</button>
+    <button onclick="setLang('en')">EN</button>
+    <button onclick="setLang('es')">ES</button>
+    <button onclick="setLang('ar')">AR</button>
   </div>
+</nav>
 
-  <section id="tarifs">
-    <h2 data-i18n="tarifs">Nos Tarifs</h2>
-    <table>
-      <tr>
-        <th data-i18n="service">Service</th>
-        <th data-i18n="description">Description</th>
-        <th>Prix (DH)</th>
-      </tr>
-      <tr>
-        <td data-i18n="dossier">Dossier complet</td>
-        <td data-i18n="desc1">Plans + schémas + tableaux + moteur</td>
-        <td>500</td>
-      </tr>
-      <tr>
-        <td data-i18n="simple">Simple installation</td>
-        <td data-i18n="desc2">Schéma seul avec tableau</td>
-        <td>300</td>
-      </tr>
-      <tr>
-        <td data-i18n="moteur">Moteur</td>
-        <td data-i18n="desc3">Contrôle moteur seul</td>
-        <td>280</td>
-      </tr>
-    </table>
-  </section>
+<div class="hero fade-in">
+  <img src="foto1.PNG" alt="Hero Image">
+  <h1 data-i18n="hero_title">Des plans électriques professionnels, rapides et sur mesure</h1>
+  <button onclick="document.getElementById('commande').scrollIntoView()">Commander</button>
+</div>
 
-  <section id="apropos">
-    <h2 data-i18n="apropos">À propos</h2>
-    <p data-i18n="desc">
-      ElectroPlan est spécialisé dans la création de plans électriques professionnels avec visualisation 2D/3D pour logements, projets tertiaires et industriels. Nous intervenons au Maroc, à Dubaï et en Espagne.
-    </p>
-  </section>
+<div class="features fade-in">
+  <div><i class="fas fa-clock"></i> <span data-i18n="ready_72h">Prêt jusqu’à 72h</span></div>
+  <div><i class="fas fa-edit"></i> <span data-i18n="modif_30">Modifications 30 jours</span></div>
+  <div><i class="fas fa-file-pdf"></i> <span data-i18n="pdf_reports">Rapport PDF inclus</span></div>
+</div>
 
-  <section id="commande">
-    <h2 data-i18n="formtitre">Formulaire de commande</h2>
-    <form onsubmit="sendWhatsApp(); return false;">
-      <input type="text" id="nom" placeholder="Votre nom" required />
-      <input type="text" id="projet" placeholder="Type de projet" required />
-      <textarea id="details" placeholder="Détails supplémentaires" rows="4"></textarea>
-      <button type="submit" data-i18n="envoyer">Envoyer sur WhatsApp</button>
-    </form>
-  </section>
+<section class="section" id="tarifs">
+  <h2 data-i18n="pricing_title">Nos tarifs</h2>
+  <table class="pricing-table">
+    <tr>
+      <th data-i18n="type">Type</th>
+      <th data-i18n="price">Prix</th>
+      <th data-i18n="included">Inclus</th>
+    </tr>
+    <tr>
+      <td data-i18n="logement">Logement</td>
+      <td>500 DH</td>
+      <td data-i18n="logement_includes">Plan + schémas + tableau + moteur</td>
+    </tr>
+    <tr>
+      <td data-i18n="appartement">Appartement</td>
+      <td>300 DH</td>
+      <td data-i18n="app_includes">Plan + PDF</td>
+    </tr>
+    <tr>
+      <td data-i18n="magasin">Magasin</td>
+      <td>280 DH</td>
+      <td data-i18n="store_includes">Schéma unifilaire</td>
+    </tr>
+  </table>
+</section>
 
-  <script>
-    const i18n = {
-      fr: {
-        titre: "Création de plans électriques sur mesure",
-        commander: "Commander",
-        feature1: "Prêt sous 72h",
-        feature2: "Modifications jusqu'à 30 jours",
-        feature3: "Avec rapports PDF",
-        tarifs: "Nos Tarifs",
-        service: "Service",
-        description: "Description",
-        dossier: "Dossier complet",
-        desc1: "Plans + schémas + tableaux + moteur",
-        simple: "Simple installation",
-        desc2: "Schéma seul avec tableau",
-        moteur: "Moteur",
-        desc3: "Contrôle moteur seul",
-        apropos: "À propos",
-        desc: "ElectroPlan est spécialisé dans la création de plans électriques professionnels avec visualisation 2D/3D pour logements, projets tertiaires et industriels. Nous intervenons au Maroc, à Dubaï et en Espagne.",
-        formtitre: "Formulaire de commande",
-        envoyer: "Envoyer sur WhatsApp"
-      },
-      en: {
-        titre: "Custom Electrical Plan Creation",
-        commander: "Order Now",
-        feature1: "Ready within 72h",
-        feature2: "Changes allowed up to 30 days",
-        feature3: "With PDF reports",
-        tarifs: "Pricing",
-        service: "Service",
-        description: "Description",
-        dossier: "Full Package",
-        desc1: "Plans + diagrams + panels + motor",
-        simple: "Simple Installation",
-        desc2: "Single diagram with panel",
-        moteur: "Motor",
-        desc3: "Motor control only",
-        apropos: "About Us",
-        desc: "ElectroPlan specializes in professional electrical plans with 2D/3D visualization for housing, tertiary and industrial projects. We operate in Morocco, Dubai, and Spain.",
-        formtitre: "Order Form",
-        envoyer: "Send via WhatsApp"
-      },
-      es: {
-        titre: "Creación de planos eléctricos a medida",
-        commander: "Ordenar",
-        feature1: "Listo en 72h",
-        feature2: "Modificaciones hasta 30 días",
-        feature3: "Con informes PDF",
-        tarifs: "Tarifas",
-        service: "Servicio",
-        description: "Descripción",
-        dossier: "Expediente completo",
-        desc1: "Planos + esquemas + tableros + motor",
-        simple: "Instalación simple",
-        desc2: "Esquema solo con tablero",
-        moteur: "Motor",
-        desc3: "Solo control de motor",
-        apropos: "Sobre nosotros",
-        desc: "ElectroPlan está especializado en la creación de planos eléctricos con visualización 2D/3D para viviendas y proyectos industriales. Trabajamos en Marruecos, Dubái y España.",
-        formtitre: "Formulario de pedido",
-        envoyer: "Enviar por WhatsApp"
-      },
-      ar: {
-        titre: "تصميم مخططات كهربائية حسب الطلب",
-        commander: "اطلب الآن",
-        feature1: "جاهز خلال 72 ساعة",
-        feature2: "تعديلات مسموحة حتى 30 يومًا",
-        feature3: "مع تقارير PDF",
-        tarifs: "الأسعار",
-        service: "الخدمة",
-        description: "الوصف",
-        dossier: "ملف كامل",
-        desc1: "مخططات + جداول + محرك",
-        simple: "تركيب بسيط",
-        desc2: "مخطط فقط مع لوحة",
-        moteur: "محرك",
-        desc3: "تحكم المحرك فقط",
-        apropos: "من نحن",
-        desc: "تختص ElectroPlan في تصميم المخططات الكهربائية الاحترافية مع تصور ثنائي/ثلاثي الأبعاد للمشاريع السكنية والصناعية. نعمل في المغرب، دبي، وإسبانيا.",
-        formtitre: "نموذج الطلب",
-        envoyer: "إرسال عبر WhatsApp"
+<section class="section" id="aide">
+  <h2 data-i18n="aide_title">Besoin d’aide ?</h2>
+  <p data-i18n="aide_text">Contactez-nous directement sur WhatsApp pour toute question technique ou demande spéciale.</p>
+</section>
+
+<section class="section" id="apropos">
+  <h2 data-i18n="about_title">À propos de nous</h2>
+  <p data-i18n="about_text">ElectroPlan est une entreprise innovante spécialisée dans les plans électriques 2D/3D avec visualisation IA.</p>
+</section>
+
+<section class="section" id="commande">
+  <h2 data-i18n="order_title">Commander maintenant</h2>
+  <form onsubmit="sendWhatsApp(); return false;">
+    <input type="text" placeholder="Nom" id="name" required><br><br>
+    <input type="text" placeholder="Projet" id="project" required><br><br>
+    <textarea placeholder="Détails..." id="details"></textarea><br><br>
+    <button type="submit" data-i18n="submit">Envoyer via WhatsApp</button>
+  </form>
+</section>
+
+<footer>
+  <p>&copy; 2025 ElectroPlan</p>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById("menu").classList.toggle("open");
+  }
+
+  function sendWhatsApp() {
+    const name = document.getElementById("name").value;
+    const project = document.getElementById("project").value;
+    const details = document.getElementById("details").value;
+    const message = `Bonjour, je suis ${name} et je souhaite commander pour ${project}. Détails : ${details}`;
+    window.open(`https://wa.me/212635978858?text=${encodeURIComponent(message)}`, '_blank');
+  }
+
+  // Logo scroll
+  window.addEventListener("scroll", function () {
+    const header = document.getElementById("mainHeader");
+    const logo = document.getElementById("logo");
+    if (window.scrollY > 50) {
+      header.classList.add("scrolled");
+      logo.src = "foto2.PNG";
+    } else {
+      header.classList.remove("scrolled");
+      logo.src = "foto1.PNG";
+    }
+  });
+
+  // Multilingue simple
+  const translations = {
+    en: {
+      hero_title: "Professional, fast, custom electrical plans",
+      ready_72h: "Ready within 72h",
+      modif_30: "Edits up to 30 days",
+      pdf_reports: "PDF report included",
+      pricing_title: "Pricing",
+      type: "Type",
+      price: "Price",
+      included: "Included",
+      logement: "Housing",
+      logement_includes: "Plan + schematics + panel + motor",
+      appartement: "Apartment",
+      app_includes: "Plan + PDF",
+      magasin: "Store",
+      store_includes: "Single-line diagram",
+      aide_title: "Need help?",
+      aide_text: "Contact us on WhatsApp for any technical request.",
+      about_title: "About us",
+      about_text: "ElectroPlan provides smart 2D/3D electrical plans using AI.",
+      order_title: "Order now",
+      submit: "Send via WhatsApp"
+    },
+    es: {
+      hero_title: "Planes eléctricos rápidos y personalizados",
+      ready_72h: "Listo en 72h",
+      modif_30: "Cambios hasta 30 días",
+      pdf_reports: "Informe PDF incluido",
+      pricing_title: "Precios",
+      type: "Tipo",
+      price: "Precio",
+      included: "Incluye",
+      logement: "Vivienda",
+      logement_includes: "Plano + esquemas + cuadro + motor",
+      appartement: "Apartamento",
+      app_includes: "Plano + PDF",
+      magasin: "Tienda",
+      store_includes: "Esquema unifilar",
+      aide_title: "¿Necesitas ayuda?",
+      aide_text: "Contáctanos por WhatsApp.",
+      about_title: "Sobre nosotros",
+      about_text: "ElectroPlan ofrece planos eléctricos con IA.",
+      order_title: "Hacer pedido",
+      submit: "Enviar por WhatsApp"
+    },
+    ar: {
+      hero_title: "مخططات كهربائية احترافية وسريعة",
+      ready_72h: "جاهز في 72 ساعة",
+      modif_30: "تعديلات لمدة 30 يومًا",
+      pdf_reports: "تقرير PDF مشمول",
+      pricing_title: "الأسعار",
+      type: "النوع",
+      price: "السعر",
+      included: "يشمل",
+      logement: "السكن",
+      logement_includes: "مخطط + رسومات + لوحة + محرك",
+      appartement: "شقة",
+      app_includes: "مخطط + PDF",
+      magasin: "متجر",
+      store_includes: "مخطط أحادي الخط",
+      aide_title: "تحتاج مساعدة؟",
+      aide_text: "تواصل معنا على WhatsApp.",
+      about_title: "من نحن",
+      about_text: "ElectroPlan تقدم مخططات كهربائية ذكية.",
+      order_title: "اطلب الآن",
+      submit: "أرسل عبر WhatsApp"
+    }
+  };
+
+  function setLang(lang) {
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      if (translations[lang][key]) {
+        el.innerText = translations[lang][key];
       }
-    };
-
-    function setLang(lang) {
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        el.textContent = i18n[lang][key] || key;
-      });
-    }
-
-    function toggleMenu() {
-      const nav = document.getElementById('menu');
-      nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-    }
-
-    function sendWhatsApp() {
-      const nom = document.getElementById('nom').value;
-      const projet = document.getElementById('projet').value;
-      const details = document.getElementById('details').value;
-      const message = `Bonjour, je m'appelle ${nom}. Projet: ${projet}. Détails: ${details}`;
-      const url = `https://wa.me/212612345678?text=${encodeURIComponent(message)}`;
-      window.open(url, '_blank');
-    }
-
-    // Logo scroll effect
-    window.addEventListener("scroll", () => {
-      const logo = document.getElementById("logo");
-      logo.src = window.scrollY > 50 ? "foto2.PNG" : "foto1.PNG";
     });
-  </script>
+  }
+</script>
+
 </body>
 </html>

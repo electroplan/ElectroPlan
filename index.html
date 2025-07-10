@@ -141,4 +141,120 @@
   <section id="tarifs" style="padding: 40px 20px;">
     <h2>Nos Tarifs</h2>
     <table style="margin: 0 auto; border-collapse: collapse;">
-      <tr style="background-color:
+      <tr style="background-color: #fcb026; color: white;">
+        <th style="padding: 10px;">Service</th>
+        <th style="padding: 10px;">Description</th>
+        <th style="padding: 10px;">Prix (DH)</th>
+      </tr>
+      <tr>
+        <td style="padding: 10px;">Dossier complet</td>
+        <td style="padding: 10px;">Plans + schémas + tableaux + moteur</td>
+        <td style="padding: 10px;">500</td>
+      </tr>
+      <tr>
+        <td style="padding: 10px;">Simple installation</td>
+        <td style="padding: 10px;">Schéma seul avec tableau</td>
+        <td style="padding: 10px;">300</td>
+      </tr>
+      <tr>
+        <td style="padding: 10px;">Moteur</td>
+        <td style="padding: 10px;">Contrôle moteur seul</td>
+        <td style="padding: 10px;">280</td>
+      </tr>
+    </table>
+  </section>
+
+  <section id="apropos" style="padding: 40px 20px;">
+    <h2>À propos de nous</h2>
+    <p>ElectroPlan est spécialisé dans la création de plans électriques professionnels avec visualisation 2D/3D pour logements, projets tertiaires et industriels. Nous intervenons au Maroc, à Dubaï et en Espagne.</p>
+  </section>
+
+  <section id="commander" style="padding: 40px 20px;">
+    <h2>Commander</h2>
+    <form onsubmit="sendWhatsApp(event)">
+      <input type="text" id="name" placeholder="Nom" required />
+      <input type="text" id="project" placeholder="Type de projet" required />
+      <button class="btn" type="submit">Envoyer via WhatsApp</button>
+    </form>
+  </section>
+
+  <footer>
+    &copy; 2025 ElectroPlan – Tous droits réservés.
+  </footer>
+
+  <script>
+    // Logo scroll switch
+    window.addEventListener("scroll", function () {
+      const logo = document.getElementById("logo");
+      if (window.scrollY > 50) {
+        logo.src = "foto2.PNG";
+      } else {
+        logo.src = "foto1.PNG";
+      }
+    });
+
+    // WhatsApp send
+    function sendWhatsApp(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const project = document.getElementById("project").value;
+      const message = `Bonjour, je suis ${name} et je souhaite commander un plan pour : ${project}`;
+      const phone = "212635978858";
+      const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+    }
+
+    // Multilingual
+    const translations = {
+      fr: {
+        title: "Création de plans électriques sur mesure",
+        order: "Commander",
+        ready: "Prêt sous 72h",
+        modify: "Modifications jusqu'à 30 jours",
+        report: "Avec rapports PDF",
+        nav: ["Nos Tarifs", "À propos", "Commander"]
+      },
+      en: {
+        title: "Custom Electrical Plans",
+        order: "Order now",
+        ready: "Ready within 72h",
+        modify: "Edits up to 30 days",
+        report: "With PDF reports",
+        nav: ["Pricing", "About us", "Order"]
+      },
+      es: {
+        title: "Creación de planos eléctricos a medida",
+        order: "Pedir ahora",
+        ready: "Listo en 72h",
+        modify: "Modificaciones hasta 30 días",
+        report: "Con informes PDF",
+        nav: ["Precios", "Sobre nosotros", "Pedir"]
+      },
+      ar: {
+        title: "تصميم مخططات كهربائية حسب الطلب",
+        order: "اطلب الآن",
+        ready: "جاهز خلال 72 ساعة",
+        modify: "تعديلات حتى 30 يوم",
+        report: "مع تقارير PDF",
+        nav: ["الأسعار", "من نحن", "اطلب"]
+      }
+    };
+
+    function changeLanguage(lang) {
+      const t = translations[lang];
+      document.getElementById("main-title").innerText = t.title;
+      document.getElementById("order-btn").innerText = t.order;
+      document.getElementById("txt-ready").innerText = t.ready;
+      document.getElementById("txt-modify").innerText = t.modify;
+      document.getElementById("txt-report").innerText = t.report;
+      document.getElementById("nav-tarifs").innerText = t.nav[0];
+      document.getElementById("nav-apropos").innerText = t.nav[1];
+      document.getElementById("nav-commander").innerText = t.nav[2];
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

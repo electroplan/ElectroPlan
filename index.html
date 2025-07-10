@@ -2,223 +2,143 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ElectroPlan</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
-    :root {
-      --primary: #f9a825;
-      --dark: #0f2c52;
-      --light: #ffffff;
-    }
-
     body {
-      font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      background: var(--light);
-      color: var(--dark);
+      font-family: 'Segoe UI', sans-serif;
+      background-color: white;
+      color: #002f5e;
     }
 
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
+      padding: 10px 20px;
+      border-bottom: 2px solid #fcb026;
       position: fixed;
-      width: 100%;
       top: 0;
-      background-color: var(--light);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 100%;
+      background: white;
       z-index: 1000;
+    }
+
+    #logo {
+      height: 40px;
       transition: all 0.3s ease;
-    }
-
-    header img {
-      height: 50px;
-      transition: all 0.3s ease;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .lang-switcher select {
-      padding: 5px;
-      border-radius: 5px;
-    }
-
-    .hero {
-      margin-top: 100px;
-      text-align: center;
-      padding: 2rem;
-    }
-
-    .btn-commander {
-      background-color: var(--primary);
-      color: white;
-      padding: 1rem 2rem;
-      border: none;
-      font-size: 1.1rem;
-      border-radius: 8px;
-      margin-top: 1.5rem;
       cursor: pointer;
+    }
+
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #002f5e;
+      font-weight: bold;
+    }
+
+    main {
+      padding: 120px 20px 40px;
+      text-align: center;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .btn {
+      background-color: #fcb026;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      margin: 20px 0;
+      cursor: pointer;
+      border-radius: 8px;
     }
 
     .features {
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .feature {
-      text-align: center;
-      max-width: 200px;
-    }
-
-    .feature i {
-      font-size: 2.5rem;
-      color: var(--primary);
-    }
-
-    section {
-      padding: 3rem 1.5rem;
-    }
-
-    h2 {
-      text-align: center;
-      color: var(--dark);
-    }
-
-    .tarifs, .a-propos, .formulaire {
-      max-width: 800px;
-      margin: auto;
-    }
-
-    form {
-      display: flex;
       flex-direction: column;
-      gap: 1rem;
-      margin-top: 2rem;
+      align-items: center;
+      gap: 30px;
+      margin-top: 30px;
     }
 
-    input, textarea {
-      padding: 1rem;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+    .features i {
+      font-size: 2em;
+      color: #fcb026;
     }
 
-    .whatsapp-button {
-      background-color: #25d366;
-      color: white;
-      padding: 1rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+    select {
+      margin-left: 10px;
+      padding: 4px;
     }
 
     footer {
       text-align: center;
-      padding: 2rem;
-      background-color: #f1f1f1;
+      padding: 20px;
+      font-size: 0.9em;
+      color: gray;
     }
 
-    @media(max-width: 768px) {
+    @media (min-width: 600px) {
       .features {
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        justify-content: center;
       }
     }
   </style>
 </head>
-<body>
 
-  <header id="main-header">
-    <a href="#"><img id="logo-img" src="foto1.PNG" alt="ElectroPlan logo"></a>
+<body>
+  <header>
+    <img id="logo" src="foto1.PNG" alt="ElectroPlan" onclick="scrollToTop()"/>
     <nav>
-      <a href="#tarifs">Nos Tarifs</a>
-      <a href="#apropos">À propos</a>
-      <a href="#commande">Commander</a>
-      <div class="lang-switcher">
-        <select onchange="switchLang(this.value)">
-          <option value="fr">Français</option>
-          <option value="en">English</option>
-          <option value="es">Español</option>
-          <option value="ar">عربي</option>
-        </select>
-      </div>
+      <a href="#tarifs" id="nav-tarifs">Nos Tarifs</a>
+      <a href="#apropos" id="nav-apropos">À propos</a>
+      <a href="#commander" id="nav-commander">Commander</a>
+      <select onchange="changeLanguage(this.value)">
+        <option value="fr">Français</option>
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="ar">العربية</option>
+      </select>
     </nav>
   </header>
 
-  <section class="hero">
-    <h1 id="title-text">Création de plans électriques sur mesure</h1>
-    <button class="btn-commander" onclick="document.location='#commande'">Commander</button>
+  <main>
+    <h1 id="main-title" class="fade-in">Création de plans électriques sur mesure</h1>
+    <a href="#commander"><button id="order-btn" class="btn">Commander</button></a>
 
     <div class="features">
-      <div class="feature"><i class="fas fa-clock"></i><p>Prêt sous 72h</p></div>
-      <div class="feature"><i class="fas fa-pen-to-square"></i><p>Modifications jusqu'à 30 jours</p></div>
-      <div class="feature"><i class="fas fa-file-pdf"></i><p>Rapports PDF inclus</p></div>
+      <div>
+        <i class="fas fa-clock"></i>
+        <p id="txt-ready">Prêt sous 72h</p>
+      </div>
+      <div>
+        <i class="fas fa-pen"></i>
+        <p id="txt-modify">Modifications jusqu'à 30 jours</p>
+      </div>
+      <div>
+        <i class="fas fa-file-pdf"></i>
+        <p id="txt-report">Avec rapports PDF</p>
+      </div>
     </div>
-  </section>
+  </main>
 
-  <section id="tarifs" class="tarifs">
+  <section id="tarifs" style="padding: 40px 20px;">
     <h2>Nos Tarifs</h2>
-    <ul>
-      <li>Dossier complet logement (plans + schémas + tableau + moteur) : <strong>500 DH</strong></li>
-      <li>Appartement ou villa : <strong>300 DH</strong></li>
-      <li>Magasin : <strong>280 DH</strong></li>
-    </ul>
-  </section>
-
-  <section id="apropos" class="a-propos">
-    <h2>À propos de nous</h2>
-    <p>ElectroPlan est un service spécialisé dans la création de plans électriques professionnels avec visualisation 2D/3D, basé sur vos besoins spécifiques. Nous intervenons au Maroc, à Dubaï et en Espagne.</p>
-  </section>
-
-  <section id="commande" class="formulaire">
-    <h2>Commander maintenant</h2>
-    <form onsubmit="sendWhatsApp(); return false;">
-      <input type="text" id="nom" placeholder="Votre nom" required />
-      <input type="email" id="email" placeholder="Votre email" required />
-      <textarea id="message" placeholder="Décrivez votre besoin..." required></textarea>
-      <button type="submit" class="whatsapp-button">Envoyer via WhatsApp</button>
-    </form>
-  </section>
-
-  <footer>
-    &copy; 2025 ElectroPlan – Tous droits réservés
-  </footer>
-
-  <script>
-    window.addEventListener("scroll", () => {
-      const logo = document.getElementById("logo-img");
-      if (window.scrollY > 100) {
-        logo.src = "foto2.PNG";
-      } else {
-        logo.src = "foto1.PNG";
-      }
-    });
-
-    function switchLang(lang) {
-      alert("Multilingue bientôt activé pour : " + lang);
-      // À implémenter plus tard pour changement de texte
-    }
-
-    function sendWhatsApp() {
-      const nom = document.getElementById("nom").value;
-      const email = document.getElementById("email").value;
-      const msg = document.getElementById("message").value;
-      const numero = "+212635978858";
-      const text = `Bonjour, je m'appelle ${nom}, voici mon email : ${email}. Voici ma demande : ${msg}`;
-      const url = `https://wa.me/${numero}?text=${encodeURIComponent(text)}`;
-      window.open(url, '_blank');
-    }
-  </script>
-
-</body>
-</html>
+    <table style="margin: 0 auto; border-collapse: collapse;">
+      <tr style="background-color:

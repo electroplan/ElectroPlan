@@ -6,25 +6,130 @@
   <title>ElectroPlan</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
+      margin: 0;
+      background-color: #ffffff;
+      color: #333;
     }
 
     header {
-      background-color: #195082;
-      color: white;
-      padding: 20px 10px;
-      position: sticky;
+      position: fixed;
       top: 0;
+      width: 100%;
+      background-color: #004080;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
       z-index: 1000;
-      text-align: center;
+      transition: background-color 0.3s;
     }
 
     header img {
-      height: 60px;
+      height: 50px;
       transition: all 0.3s ease;
     }
 
+    .container {
+      padding: 120px 20px 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
     h1 {
-      margin
+      color: #004080;
+    }
+
+    h2 {
+      color: #004080;
+      margin-top: 40px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #ffcc00;
+    }
+
+    .whatsapp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+
+    .whatsapp img {
+      width: 60px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <img id="logo" src="foto1.PNG" alt="Logo ElectroPlan" />
+  </header>
+
+  <div class="container">
+    <h1>Des plans électriques intelligents, précis et accessibles</h1>
+
+    <h2>Qui sommes-nous ?</h2>
+    <p>
+      ElectroPlan est une entreprise spécialisée dans la création de plans électriques personnalisés, la visualisation 2D/3D, les schémas professionnels et les tableaux électriques. Nous intervenons au Maroc, à Dubaï et en Espagne.
+    </p>
+
+    <h2>Nos services</h2>
+    <table>
+      <tr>
+        <th>Service</th>
+        <th>Description</th>
+        <th>Prix (MAD)</th>
+      </tr>
+      <tr>
+        <td>Dossier complet logement</td>
+        <td>Plans + schémas + tableaux électriques + contrôle moteur + visualisation 2D/3D</td>
+        <td>500 DH</td>
+      </tr>
+      <tr>
+        <td>Tableau électrique seul</td>
+        <td>Schéma + installation complète d’un tableau</td>
+        <td>300 DH</td>
+      </tr>
+      <tr>
+        <td>Plan 2D seul</td>
+        <td>Plan électrique de base pour logement ou bureau</td>
+        <td>280 DH</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- WhatsApp Button -->
+  <a class="whatsapp" href="https://wa.me/212635978858" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+  </a>
+
+  <script>
+    // Change logo on scroll
+    const logo = document.getElementById("logo");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 50) {
+        logo.src = "foto2.PNG";
+      } else {
+        logo.src = "foto1.PNG";
+      }
+    });
+  </script>
+
+</body>
+</html>

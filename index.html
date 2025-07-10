@@ -1,53 +1,167 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ElectroPlan</title>
+  <link rel="icon" href="foto2.PNG" type="image/png">
   <style>
-    body { margin:0; font-family:Arial,sans-serif; background:#fff; color:#002F5F; }
-    header { position:fixed;top:0;width:100%;background:#fff;display:flex;justify-content:center;align-items:center;height:130px;transition:all .3s;z-index:1000;border-bottom:1px solid #eee; }
-    header.scrolled { height:80px; }
-    #logo { max-height:110px;transition:all .3s; }
-    header.scrolled #logo { max-height:60px; }
-    .spacer { height:140px; }
-    .container { max-width:1000px;margin:auto;padding:20px; }
-    h1,h2 { color:#002F5F; }
-    table { width:100%;border-collapse:collapse;margin-top:20px;background:#f9f9f9; }
-    th,td { padding:12px;border:1px solid #ccc;text-align:left; }
-    th { background:#FBC02D;color:#002F5F; }
-    .testimonial { margin-top:40px;background:#fefefe;padding:20px;border-left:5px solid #F57C00; }
-    .whatsapp { position:fixed;bottom:20px;right:20px;z-index:999; }
-    .whatsapp img { width:60px; }
-    footer { text-align:center;padding:20px;background:#FBC02D;color:#002F5F;margin-top:40px; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #FFFFFF;
+      color: #002F5F;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: #FFFFFF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 130px;
+      transition: all 0.3s ease;
+      z-index: 1000;
+      border-bottom: 1px solid #eee;
+    }
+
+    header.scrolled {
+      height: 80px;
+    }
+
+    #logo {
+      max-height: 110px;
+      transition: all 0.3s ease;
+    }
+
+    header.scrolled #logo {
+      max-height: 60px;
+    }
+
+    .spacer {
+      height: 140px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h1, h2 {
+      color: #002F5F;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: #F9F9F9;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+
+    th {
+      background: #FBC02D;
+      color: #002F5F;
+    }
+
+    .testimonial {
+      margin-top: 40px;
+      background: #FEFEFE;
+      padding: 20px;
+      border-left: 5px solid #FBC02D;
+    }
+
+    .whatsapp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+
+    .whatsapp img {
+      width: 60px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #FBC02D;
+      color: #002F5F;
+      margin-top: 40px;
+    }
   </style>
 </head>
+
 <body>
-  <header id="header"><img id="logo" src="foto1.PNG" alt="ElectroPlan"></header>
+  <header>
+    <img id="logo" src="foto1.PNG" alt="ElectroPlan">
+  </header>
+
   <div class="spacer"></div>
+
   <div class="container">
-    <h1>Des plans électriques intelligents, précis et accessibles</h1>
-    <h2>Qui sommes-nous ?</h2>
-    <p>ElectroPlan est une entreprise spécialisée dans la création de plans électriques personnalisés, la visualisation 2D/3D, les schémas professionnels et les tableaux électriques. Nous intervenons au Maroc, à Dubaï et en Espagne.</p>
+    <h1>Bienvenue chez ElectroPlan</h1>
+    <p>Des plans électriques personnalisés, avec schémas, visualisation 2D/3D, tableau électrique et contrôle moteur – livrés rapidement et avec professionnalisme 🇲🇦 🇪🇸 🇦🇪</p>
+
     <h2>Nos services</h2>
     <table>
-      <tr><th>Service</th><th>Description</th><th>Prix</th></tr>
-      <tr><td>Dossier complet logement</td><td>Plans + schémas + tableaux électriques + contrôle moteur</td><td>500 DH</td></tr>
-      <tr><td>Visualisation 2D/3D</td><td>Modélisation réaliste des installations</td><td>300 DH</td></tr>
-      <tr><td>Tableaux électriques</td><td>Conception professionnelle selon normes</td><td>280 DH</td></tr>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Prix (MAD)</th>
+      </tr>
+      <tr>
+        <td>Logement</td>
+        <td>Plan + schémas + tableau électrique</td>
+        <td>500 DH</td>
+      </tr>
+      <tr>
+        <td>Appartement / Villa</td>
+        <td>Visualisation + tableau électrique + contrôle moteur</td>
+        <td>300 DH</td>
+      </tr>
+      <tr>
+        <td>Magasin</td>
+        <td>Plan complet + simulation 3D + optimisation</td>
+        <td>280 DH</td>
+      </tr>
     </table>
+
     <div class="testimonial">
-      <h2>Témoignage client</h2>
-      <p>"Travail rapide et très professionnel. J’ai reçu mon plan complet en moins de 24 h avec visualisation 3D parfaite. Je recommande fortement !" – Client au Maroc</p>
+      <strong>✨ Témoignage client (Danemark – Handyhand) :</strong>
+      <p>“Service au top ! Très pro, ponctuel, avec un travail propre et rapide. Merci Abdelali 👏”</p>
     </div>
   </div>
-  <div class="whatsapp"><a href="https://wa.me/212635978858" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"></a></div>
-  <footer>© 2025 ElectroPlan. Tous droits réservés.</footer>
+
+  <div class="whatsapp">
+    <a href="https://wa.me/212635978858" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="Contact WhatsApp">
+    </a>
+  </div>
+
+  <footer>
+    © 2025 ElectroPlan – Plans électriques professionnels 🇲🇦 🇪🇸 🇦🇪
+  </footer>
+
   <script>
-    const header = document.getElementById('header'), logo = document.getElementById('logo');
-    window.addEventListener('scroll', () => {
-      logo.src = (window.scrollY>50) ? 'foto2.PNG' : 'foto1.PNG';
-      header.classList.toggle('scrolled', window.scrollY>50);
+    window.addEventListener('scroll', function () {
+      const header = document.querySelector('header');
+      const logo = document.querySelector('#logo');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+        logo.src = 'foto2.PNG';
+      } else {
+        header.classList.remove('scrolled');
+        logo.src = 'foto1.PNG';
+      }
     });
   </script>
 </body>

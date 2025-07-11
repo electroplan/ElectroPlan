@@ -1,173 +1,111 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
- <meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>ElectroPlan</title>
- <style>
-   body {
-     font-family: Arial, sans-serif;
-     margin: 0;
-     padding: 0;
-     background: #fff;
-     color: #002244;
-     animation: fadeIn 1s ease-in;
-   }
-   @keyframes fadeIn {
-     from { opacity: 0; }
-     to { opacity: 1; }
-   }
-   header {
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-     background: #fff;
-     padding: 10px 20px;
-     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-     position: fixed;
-     width: 100%;
-     z-index: 10;
-   }
-   .logo img {
-     height: 40px;
-     transition: all 0.3s ease;
-   }
-   .menu {
-     display: none;
-     flex-direction: column;
-   }
-   .menu.active {
-     display: flex;
-     position: absolute;
-     top: 60px;
-     right: 0;
-     background: white;
-     width: 100%;
-     text-align: center;
-     box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-   }
-   .menu a {
-     padding: 15px;
-     text-decoration: none;
-     color: #002244;
-     border-top: 1px solid #eee;
-   }
-   .lang-switcher {
-     display: flex;
-     justify-content: center;
-     margin: 15px 0;
-   }
-   .lang-switcher button {
-     margin: 0 5px;
-     padding: 5px 10px;
-     border: none;
-     background: #002244;
-     color: white;
-     cursor: pointer;
-   }
-   .pricing {
-     margin-top: 120px;
-     padding: 20px;
-     text-align: center;
-   }
-   table {
-     width: 100%;
-     border-collapse: collapse;
-     margin-top: 10px;
-   }
-   th, td {
-     padding: 10px;
-     border: 1px solid #ccc;
-   }
-   .currency-selector {
-     margin: 10px 0;
-   }
- </style>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>ElectroPlan</title>
+   <link rel="stylesheet" href="style.css" />
+   <script src="script.js" defer></script>
 </head>
 <body>
- <header>
-   <div class="logo">
-     <img id="logo" src="foto1.PNG" alt="Logo" />
-   </div>
-   <div class="hamburger" onclick="toggleMenu()">☰</div>
-   <nav class="menu" id="menu">
-     <a href="#tarifs" data-i18n="menu_tarifs">Nos Tarifs</a>
-     <a href="#apropos" data-i18n="menu_apropos">À propos</a>
-     <a href="#commande" data-i18n="menu_commander">Commander</a>
-     <div class="lang-switcher">
-       <button onclick="setLang('fr')">FR</button>
-       <button onclick="setLang('en')">EN</button>
-       <button onclick="setLang('es')">ES</button>
-       <button onclick="setLang('ar')">AR</button>
-     </div>
-   </nav>
- </header>
+   <header>
+       <div class="logo">
+           <img src="foto1.PNG" id="logo" alt="ElectroPlan Logo" />
+       </div>
+       <nav class="hamburger-menu">
+           <input type="checkbox" id="menu-toggle" />
+           <label for="menu-toggle" class="menu-icon">&#9776;</label>
+           <div class="menu">
+               <a href="#tarifs" onclick="closeMenu()">Nos Tarifs</a>
+               <a href="#apropos" onclick="closeMenu()">À propos</a>
+               <a href="#commande" onclick="closeMenu()">Commander</a>
+               <div class="lang-switcher">
+                   <button onclick="setLang('fr')">FR</button>
+                   <button onclick="setLang('en')">EN</button>
+                   <button onclick="setLang('es')">ES</button>
+                   <button onclick="setLang('ar')">AR</button>
+               </div>
+           </div>
+       </nav>
+   </header>
 
- <section class="pricing" id="tarifs">
-   <h2 data-i18n="title_tarifs">Nos Tarifs</h2>
-   <div class="currency-selector">
-     <label for="currency">Devise :</label>
-     <select id="currency" onchange="convertPrices()">
-       <option value="MAD">DH</option>
-       <option value="EUR">€</option>
-       <option value="AED">AED</option>
-     </select>
-   </div>
-   <table>
-     <thead>
-       <tr>
-         <th data-i18n="service">Service</th>
-         <th data-i18n="price">Prix</th>
-         <th data-i18n="details">Inclus</th>
-       </tr>
-     </thead>
-     <tbody>
-       <tr>
-         <td>Dossier complet</td>
-         <td class="price" data-mad="500">500 DH</td>
-         <td>Plans + schémas + tableaux + moteur</td>
-       </tr>
-       <tr>
-         <td>Installation simple</td>
-         <td class="price" data-mad="300">300 DH</td>
-         <td>Schéma + tableau</td>
-       </tr>
-       <tr>
-         <td>Contrôle moteur</td>
-         <td class="price" data-mad="280">280 DH</td>
-         <td>Schéma moteur seul</td>
-       </tr>
-     </tbody>
-   </table>
-   <p style="margin-top:10px">
-     <strong>Explications :</strong><br/>
-     <em>Unifilaire</em>: plan simple. <em>Multifilaire</em>: plus détaillé. <em>Dossier complet</em>: tous les plans + moteur + tableau.
-   </p>
- </section>
+   <section class="hero">
+       <h1 data-translate="hero_title">Création de plans électriques sur mesure</h1>
+       <button onclick="scrollToCommande()" data-translate="commander_btn">Commander</button>
+       <div class="features">
+           <div><span>⏱</span> <p data-translate="delai">Prêt sous 72h</p></div>
+           <div><span>✏️</span> <p data-translate="modifs">Modifications jusqu’à 30 jours</p></div>
+           <div><span>📄</span> <p data-translate="pdf">Avec rapports PDF</p></div>
+       </div>
+   </section>
 
- <script>
-   const exchangeRates = { MAD: 1, EUR: 0.091, AED: 0.34 };
-   function convertPrices() {
-     const currency = document.getElementById("currency").value;
-     const prices = document.querySelectorAll(".price");
-     prices.forEach(p => {
-       const base = parseFloat(p.dataset.mad);
-       const converted = Math.round(base * exchangeRates[currency]);
-       p.textContent = converted + " " + currency;
-     });
-   }
-   function toggleMenu() {
-     document.getElementById("menu").classList.toggle("active");
-   }
-   window.addEventListener("scroll", () => {
-     const logo = document.getElementById("logo");
-     if (window.scrollY > 50) logo.src = "foto2.PNG";
-     else logo.src = "foto1.PNG";
-   });
-   function setLang(lang) {
-     // Fake translator - for real use i18n libraries or JSON mapping
-     alert("Traduction activée: " + lang);
-   }
- </script>
+   <section id="tarifs">
+       <h2 data-translate="nos_tarifs">Nos Tarifs</h2>
+       <label for="currency" data-translate="devise">Devise :</label>
+       <select id="currency" onchange="convertPrices()">
+           <option value="MAD">MAD</option>
+           <option value="EUR">EUR</option>
+           <option value="AED">AED</option>
+       </select>
+       <table>
+           <thead>
+               <tr>
+                   <th data-translate="service">Service</th>
+                   <th data-translate="prix">Prix</th>
+                   <th data-translate="inclus">Inclus</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr>
+                   <td data-translate="dossier_complet">Dossier complet</td>
+                   <td class="price" data-mad="500">500 MAD</td>
+                   <td data-translate="inclus_1">Plans + schémas + tableaux + moteur</td>
+               </tr>
+               <tr>
+                   <td data-translate="simple_installation">Installation simple</td>
+                   <td class="price" data-mad="300">300 MAD</td>
+                   <td data-translate="inclus_2">Schéma + tableau</td>
+               </tr>
+               <tr>
+                   <td data-translate="moteur">Contrôle moteur</td>
+                   <td class="price" data-mad="280">280 MAD</td>
+                   <td data-translate="inclus_3">Schéma moteur seul</td>
+               </tr>
+           </tbody>
+       </table>
+       <div class="explication">
+           <strong data-translate="explications_title">Explications :</strong><br />
+           <span data-translate="unifilaire"><em>Unifilaire</em> : plan simple.</span><br />
+           <span data-translate="multifilaire"><em>Multifilaire</em> : plus détaillé.</span><br />
+           <span data-translate="dossier_complet_exp"><em>Dossier complet</em> : tous les plans + moteur + tableau.</span>
+       </div>
+   </section>
+
+   <section id="apropos">
+       <h2 data-translate="a_propos">À propos de nous</h2>
+       <p data-translate="about_text">ElectroPlan est spécialisé dans la création de plans électriques professionnels avec visualisation 2D/3D pour logements, projets tertiaires et industriels. Nous intervenons au Maroc, à Dubaï et en Espagne.</p>
+   </section>
+
+   <section id="commande">
+       <h2 data-translate="commander">Commander</h2>
+       <form>
+           <label for="type_logement" data-translate="type_logement">Type de logement :</label>
+           <select id="type_logement" name="type_logement">
+               <option value="villa" data-translate="villa">Villa</option>
+               <option value="appartement" data-translate="appartement">Appartement</option>
+               <option value="bureau" data-translate="bureau">Bureau</option>
+               <option value="autres" data-translate="autres">Autres</option>
+           </select>
+           <!-- Autres champs du formulaire ici -->
+       </form>
+   </section>
+
+   <footer>
+       <p>&copy; 2025 ElectroPlan</p>
+   </footer>
+
+   <script>
+       // Script JS de conversion + traduction + scroll + animation
+   </script>
 </body>
 </html>

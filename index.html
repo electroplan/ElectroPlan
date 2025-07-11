@@ -4,264 +4,145 @@
  <meta charset="UTF-8" />
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
  <title>ElectroPlan</title>
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
  <style>
-   body {
-     margin: 0;
-     font-family: Arial, sans-serif;
-     background: #ffffff;
-     color: #333;
-   }
-
-   header {
-     position: fixed;
-     top: 0;
-     width: 100%;
-     padding: 10px 20px;
-     background: white;
-     z-index: 999;
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-     transition: all 0.3s ease;
-   }
-
-   header img {
-     height: 60px;
-     transition: all 0.3s ease;
-   }
-
-   header.scrolled img {
-     height: 40px;
-   }
-
-   .menu-btn {
-     font-size: 24px;
-     cursor: pointer;
-   }
-
-   nav {
-     position: fixed;
-     top: 0;
-     right: -100%;
-     width: 100%;
-     height: 100vh;
-     background: white;
-     transition: right 0.3s ease;
-     z-index: 998;
-     padding: 40px 20px;
-     text-align: center;
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-   }
-
-   nav.active {
-     right: 0;
-   }
-
-   nav a {
-     margin: 15px 0;
-     font-size: 22px;
-     text-decoration: none;
-     color: #333;
-   }
-
-   .close-btn {
-     position: absolute;
-     top: 20px;
-     right: 20px;
-     font-size: 30px;
-     cursor: pointer;
-   }
-
-   .lang-switcher {
-     position: absolute;
-     bottom: 40px;
-     left: 0;
-     right: 0;
-     text-align: center;
-   }
-
-   .lang-switcher button {
-     margin: 5px;
-     padding: 5px 10px;
-   }
-
-   .main {
-     padding-top: 100px;
-     text-align: center;
-   }
-
-   .main h1 {
-     font-size: 2.5em;
-   }
-
-   .features {
-     display: flex;
-     justify-content: space-around;
-     flex-wrap: wrap;
-     padding: 30px 10px;
-   }
-
-   .feature {
-     margin: 10px;
-     text-align: center;
-   }
-
-   .feature i {
-     font-size: 30px;
-     margin-bottom: 10px;
-     color: #ffcc00;
-   }
-
-   .btn-order {
-     margin-top: 20px;
-     padding: 12px 30px;
-     background: #007BFF;
-     color: white;
-     border: none;
-     font-size: 16px;
-     border-radius: 5px;
-     cursor: pointer;
-   }
-
-   .pricing-table {
-     max-width: 600px;
-     margin: 0 auto;
-     text-align: center;
-     padding: 20px;
-   }
-
-   .pricing-table table {
-     width: 100%;
-     border-collapse: collapse;
-   }
-
-   .pricing-table th, .pricing-table td {
-     border: 1px solid #ddd;
-     padding: 10px;
-   }
-
-   .pricing-table th {
-     background: #f0f0f0;
-   }
-
-   .explanation {
-     max-width: 600px;
-     margin: 20px auto;
-     font-size: 14px;
-     color: #555;
-   }
-
-   footer {
-     text-align: center;
-     padding: 20px;
-     background: #f2f2f2;
-     margin-top: 30px;
-     font-size: 14px;
+   /* Styles CSS optimisés */
+   body { font-family: Arial, sans-serif; margin: 0; background: #fff; color: #002244; }
+   header { display: flex; align-items: center; justify-content: space-between; padding: 1em; background: #fff; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+   header img { height: 40px; transition: all 0.3s ease; }
+   header.scrolled img { height: 30px; }
+   nav ul { list-style: none; padding: 0; display: flex; gap: 20px; }
+   nav ul li { cursor: pointer; }
+   .menu-toggle { display: none; cursor: pointer; font-size: 1.5em; }
+   .hero { padding-top: 100px; text-align: center; }
+   .hero button { background: #f5a623; color: white; border: none; padding: 15px 25px; font-size: 1.2em; cursor: pointer; border-radius: 5px; }
+   .features { display: flex; justify-content: center; gap: 2em; margin: 2em 1em; text-align: center; flex-wrap: wrap; }
+   .features div { max-width: 120px; }
+   .tarifs-table { width: 90%; margin: 2em auto; border-collapse: collapse; }
+   .tarifs-table th, .tarifs-table td { border: 1px solid #ccc; padding: 1em; text-align: center; }
+   .tarifs-table th { background: #005bac; color: white; }
+   .formulaire { background: #f9f9f9; padding: 2em; margin: 2em; border-radius: 10px; max-width: 500px; margin-left: auto; margin-right: auto; }
+   .lang-switcher { text-align: center; margin-top: 2em; }
+   .fade-in { animation: fadeIn 1s ease forwards; opacity: 0; }
+   @keyframes fadeIn { to { opacity: 1; } }
+   @media (max-width: 768px) {
+     nav ul { flex-direction: column; display: none; position: absolute; top: 60px; right: 10px; background: white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 200px; }
+     nav ul.active { display: flex; }
+     .menu-toggle { display: block; }
    }
  </style>
 </head>
 <body>
- <header id="main-header">
-   <a href="#"><img id="logo" src="foto1.PNG" alt="ElectroPlan logo" /></a>
-   <div class="menu-btn" onclick="toggleMenu()">☰</div>
+ <header>
+   <a href="#"><img src="foto1.PNG" id="logo" alt="Logo ElectroPlan"></a>
+   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+   <nav>
+     <ul id="menu">
+       <li onclick="scrollToSection('tarifs')">Nos Tarifs</li>
+       <li onclick="scrollToSection('apropos')">À propos</li>
+       <li onclick="scrollToSection('form')">Commander</li>
+       <li>
+         <div class="lang-switcher">
+           <button onclick="setLang('fr')">FR</button>
+           <button onclick="setLang('en')">EN</button>
+           <button onclick="setLang('es')">ES</button>
+           <button onclick="setLang('ar')">AR</button>
+         </div>
+       </li>
+     </ul>
+   </nav>
  </header>
 
- <nav id="menu">
-   <div class="close-btn" onclick="toggleMenu()">×</div>
-   <a href="#tarifs">Nos Tarifs</a>
-   <a href="#aide">Aide</a>
-   <a href="#apropos">À propos</a>
-   <a href="#commander">Commander</a>
-   <div class="lang-switcher">
-     <button onclick="switchLang('fr')">Français</button>
-     <button onclick="switchLang('en')">English</button>
-     <button onclick="switchLang('es')">Español</button>
-     <button onclick="switchLang('ar')">عربي</button>
-   </div>
- </nav>
-
- <div class="main">
-   <h1>Bienvenue chez ElectroPlan</h1>
-   <button class="btn-order" onclick="document.getElementById('formulaire').scrollIntoView()">Commander</button>
- </div>
-
- <div class="features">
-   <div class="feature"><i class="fas fa-clock"></i><br>Prêt jusqu’à 72h</div>
-   <div class="feature"><i class="fas fa-edit"></i><br>Modifications jusqu’à 30 jours</div>
-   <div class="feature"><i class="fas fa-file-pdf"></i><br>Avec rapports PDF</div>
- </div>
-
- <section id="tarifs" class="pricing-table">
-   <h2>Nos Tarifs</h2>
-   <table>
-     <tr><th>Type de Schéma</th><th>Prix</th></tr>
-     <tr><td>Schéma unifilaire</td><td><span id="price1">500 DH</span></td></tr>
-     <tr><td>Schéma multifilaire</td><td><span id="price2">300 DH</span></td></tr>
-     <tr><td>Dossier complet</td><td><span id="price3">280 DH</span></td></tr>
-   </table>
+ <section class="hero fade-in">
+   <h1 id="main-title">Création de plans électriques sur mesure</h1>
+   <button onclick="scrollToSection('form')">Commander</button>
  </section>
 
- <div class="explanation">
-   <p><strong>Schéma unifilaire :</strong> Vue simplifiée des circuits électriques.</p>
-   <p><strong>Schéma multifilaire :</strong> Vue détaillée avec chaque conducteur.</p>
-   <p><strong>Dossier complet :</strong> Inclut plan, schémas, tableau électrique et moteur.</p>
- </div>
+ <section class="features fade-in">
+   <div><i class="fa fa-clock fa-2x"></i><p>Prêt sous 72h</p></div>
+   <div><i class="fa fa-pen fa-2x"></i><p>Modifications 30 jours</p></div>
+   <div><i class="fa fa-file-pdf fa-2x"></i><p>Rapport PDF inclus</p></div>
+ </section>
 
- <section id="formulaire" style="text-align:center; padding:20px;">
+ <section id="tarifs" class="fade-in">
+   <h2>Nos Tarifs</h2>
+   <table class="tarifs-table">
+     <thead>
+       <tr>
+         <th>Type</th><th onclick="toggleDevise()">Prix (<span id='devise'>DH</span>)</th><th>Inclus</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr><td>Logement</td><td id="prix1">500</td><td>Plan + schémas + tableau + moteur</td></tr>
+       <tr><td>Appartement</td><td id="prix2">300</td><td>Plan + PDF</td></tr>
+       <tr><td>Bureau</td><td id="prix3">280</td><td>Schéma unifilaire</td></tr>
+     </tbody>
+   </table>
+   <p style="text-align:center">Schéma unifilaire : plan de base / Schéma multifilaire : détaillé / Dossier complet : tous schémas + moteur + tableau</p>
+ </section>
+
+ <section id="apropos" class="fade-in">
+   <h2>À propos de nous</h2>
+   <p>ElectroPlan est spécialisé dans la création de plans électriques professionnels avec visualisation 2D/3D. Nous intervenons au Maroc, à Dubaï et en Espagne.</p>
+ </section>
+
+ <section id="form" class="formulaire fade-in">
    <h2>Commander</h2>
-   <form onsubmit="openWhatsApp(); return false;">
-     <input type="text" placeholder="Nom" id="nom" required><br><br>
-     <input type="text" placeholder="Email" id="email" required><br><br>
-     <select id="type">
-       <option value="">Type de logement</option>
-       <option value="Villa">Villa</option>
-       <option value="Appartement">Appartement</option>
-       <option value="Bureau">Bureau</option>
-       <option value="Autres">Autres</option>
-     </select><br><br>
-     <textarea id="message" placeholder="Message ou demande spécifique..."></textarea><br><br>
-     <button class="btn-order">Envoyer via WhatsApp</button>
+   <form onsubmit="sendWhatsApp(); return false;">
+     <input type="text" placeholder="Nom" id="nom" required><br>
+     <input type="text" placeholder="Email ou WhatsApp" id="contact" required><br>
+     <select id="type-logement">
+       <option>Villa</option>
+       <option>Appartement</option>
+       <option>Bureau</option>
+       <option>Autres</option>
+     </select><br>
+     <textarea id="message" placeholder="Détails..."></textarea><br>
+     <button type="submit">Envoyer via WhatsApp</button>
    </form>
  </section>
 
- <footer>
-   © 2025 ElectroPlan. Tous droits réservés.
- </footer>
+<script>
+ let devise = "DH";
+ const prixDH = [500, 300, 280];
+ const taux = { EUR: 0.091, AED: 0.34, DH: 1 };
 
- <script>
-   function toggleMenu() {
-     document.getElementById('menu').classList.toggle('active');
-   }
+ function toggleDevise() {
+   devise = devise === "DH" ? "EUR" : devise === "EUR" ? "AED" : "DH";
+   document.getElementById('devise').textContent = devise;
+   const [p1, p2, p3] = prixDH.map(p => Math.round(p * taux[devise]));
+   document.getElementById('prix1').textContent = p1;
+   document.getElementById('prix2').textContent = p2;
+   document.getElementById('prix3').textContent = p3;
+ }
 
-   function switchLang(lang) {
-     alert("Traduction automatique en cours vers: " + lang);
-     // Un vrai système multilingue JS ou i18n pourrait être intégré ici
-   }
+ function sendWhatsApp() {
+   const nom = document.getElementById("nom").value;
+   const contact = document.getElementById("contact").value;
+   const type = document.getElementById("type-logement").value;
+   const msg = document.getElementById("message").value;
+   const url = `https://wa.me/212600000000?text=Commande%20ElectroPlan%0ANom:%20${nom}%0AContact:%20${contact}%0AType:%20${type}%0AMessage:%20${msg}`;
+   window.open(url, "_blank");
+ }
 
-   function openWhatsApp() {
-     const nom = document.getElementById('nom').value;
-     const email = document.getElementById('email').value;
-     const type = document.getElementById('type').value;
-     const message = document.getElementById('message').value;
-     const fullMessage = `Nom: ${nom}%0AEmail: ${email}%0AType: ${type}%0AMessage: ${message}`;
-     window.open(`https://wa.me/212635978858?text=${fullMessage}`, '_blank');
-   }
+ function toggleMenu() {
+   document.getElementById("menu").classList.toggle("active");
+ }
 
-   window.addEventListener("scroll", function () {
-     const header = document.getElementById("main-header");
-     const logo = document.getElementById("logo");
-     if (window.scrollY > 50) {
-       header.classList.add("scrolled");
-       logo.src = "foto2.PNG";
-     } else {
-       header.classList.remove("scrolled");
-       logo.src = "foto1.PNG";
-     }
-   });
- </script>
+ function scrollToSection(id) {
+   document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+   document.getElementById("menu").classList.remove("active");
+ }
+
+ function setLang(lang) {
+   alert("Traduction dynamique à intégrer avec JSON ou API – ce bouton est prêt");
+ }
+
+ window.addEventListener('scroll', function () {
+   document.querySelector("header").classList.toggle("scrolled", window.scrollY > 50);
+   document.getElementById("logo").src = window.scrollY > 50 ? "foto2.PNG" : "foto1.PNG";
+ });
+</script>
+
 </body>
 </html>

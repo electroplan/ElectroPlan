@@ -1,201 +1,141 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>ElectroPlan</title>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-   <style>
-       /* STYLES CSS PRINCIPAUX */
-       body {
-           margin: 0;
-           font-family: 'Segoe UI', sans-serif;
-           background: white;
-           color: #1a1a1a;
-       }
-       header {
-           position: fixed;
-           top: 0;
-           width: 100%;
-           background: white;
-           display: flex;
-           justify-content: space-between;
-           align-items: center;
-           padding: 10px 20px;
-           z-index: 999;
-           transition: all 0.3s ease;
-       }
-       header.scrolled {
-           box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-       }
-       .logo {
-           height: 50px;
-           transition: height 0.3s ease;
-       }
-       .logo.scrolled {
-           height: 35px;
-       }
-       nav {
-           display: none;
-           position: fixed;
-           top: 0;
-           right: 0;
-           height: 100%;
-           width: 250px;
-           background: white;
-           box-shadow: -2px 0 5px rgba(0,0,0,0.2);
-           padding: 20px;
-           z-index: 1000;
-       }
-       nav.active {
-           display: block;
-       }
-       nav a {
-           display: block;
-           margin: 20px 0;
-           text-decoration: none;
-           color: #333;
-           font-size: 18px;
-       }
-       .menu-toggle {
-           font-size: 28px;
-           cursor: pointer;
-       }
-       .section {
-           padding: 100px 20px 20px 20px;
-       }
-       .cta {
-           margin-top: 20px;
-           background: #ffc107;
-           color: #000;
-           padding: 10px 20px;
-           border: none;
-           font-size: 18px;
-           cursor: pointer;
-       }
-       .features {
-           display: flex;
-           justify-content: space-around;
-           margin-top: 30px;
-           text-align: center;
-       }
-       .features div {
-           max-width: 200px;
-       }
-       table {
-           width: 100%;
-           margin: 20px 0;
-           border-collapse: collapse;
-       }
-       th, td {
-           border: 1px solid #ddd;
-           padding: 8px;
-           text-align: center;
-       }
-       footer {
-           background: #f2f2f2;
-           padding: 20px;
-           text-align: center;
-           margin-top: 50px;
-       }
-   </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElectroPlan</title>
+  <style>
+    body { margin: 0; font-family: 'Segoe UI', sans-serif; scroll-behavior: smooth; }
+    header { position: fixed; top: 0; left: 0; width: 100%; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1000; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-weight: bold; font-size: 1.5em; color: #005baa; }
+    .hamburger { cursor: pointer; display: block; width: 25px; }
+    .hamburger div { height: 3px; background: #000; margin: 5px 0; }
+    nav { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; background: white; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: left 0.3s ease; box-shadow: 2px 0 10px rgba(0,0,0,0.1); }
+    nav.active { left: 0; }
+    nav a { margin: 20px 0; text-decoration: none; font-size: 1.2em; color: #005baa; }
+    .language-switcher { position: absolute; bottom: 30px; text-align: center; }
+    .language-switcher button { margin: 0 5px; padding: 5px 10px; }
+
+    section { padding: 100px 20px 60px; max-width: 1000px; margin: auto; }
+    h1, h2 { color: #005baa; }
+
+    .gallery img { width: 30%; margin: 1%; border-radius: 8px; cursor: pointer; }
+
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    table, th, td { border: 1px solid #ccc; }
+    th, td { padding: 12px; text-align: center; }
+
+    form input, form textarea { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; }
+    form button { padding: 10px 20px; background: #005baa; color: white; border: none; border-radius: 4px; cursor: pointer; }
+
+    footer { background: #f5f5f5; padding: 20px; text-align: center; color: #555; }
+
+    @media(min-width: 768px) {
+      .hamburger { display: none; }
+      nav { position: static; height: auto; flex-direction: row; justify-content: flex-end; box-shadow: none; }
+      nav a { margin: 0 15px; }
+    }
+  </style>
 </head>
 <body>
-   <header id="mainHeader">
-       <img src="foto1.PNG" id="logo" class="logo" alt="ElectroPlan Logo">
-       <i class="fas fa-bars menu-toggle" onclick="toggleMenu()"></i>
-   </header>
-   <nav id="navMenu">
-       <a href="#tarifs">Tarifs</a>
-       <a href="#aide">Aide</a>
-       <a href="#apropos">À propos</a>
-       <a href="#commander">Commander</a>
-       <div style="position: absolute; bottom: 20px; text-align: center; width: 100%;">
-           <span onclick="setLang('ar')">Arabe</span> -
-           <span onclick="setLang('fr')">Français</span> -
-           <span onclick="setLang('en')">Anglais</span> -
-           <span onclick="setLang('es')">Espagnol</span>
-       </div>
-   </nav>
 
-   <div class="section" id="home">
-       <h1>Bienvenue chez ElectroPlan</h1>
-       <button class="cta" onclick="document.getElementById('commander').scrollIntoView({behavior:'smooth'})">Commander</button>
-       <div class="features">
-           <div><i class="fas fa-clock"></i><br>Prêt jusqu’à 72h</div>
-           <div><i class="fas fa-edit"></i><br>Modifications 30 jours</div>
-           <div><i class="fas fa-file-pdf"></i><br>Avec rapports PDF</div>
-       </div>
-   </div>
+<header>
+  <div class="logo">ElectroPlan</div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <div></div><div></div><div></div>
+  </div>
+  <nav id="menu">
+    <a href="#accueil" onclick="toggleMenu()">Accueil</a>
+    <a href="#services" onclick="toggleMenu()">Services</a>
+    <a href="#etapes" onclick="toggleMenu()">Étapes</a>
+    <a href="#galerie" onclick="toggleMenu()">Galerie</a>
+    <a href="#tarifs" onclick="toggleMenu()">Tarifs</a>
+    <a href="#apropos" onclick="toggleMenu()">À propos</a>
+    <a href="#contact" onclick="toggleMenu()">Contact</a>
+    <div class="language-switcher">
+      <button onclick="setLang('fr')">FR</button>
+      <button onclick="setLang('en')">EN</button>
+      <button onclick="setLang('es')">ES</button>
+      <button onclick="setLang('ar')">AR</button>
+    </div>
+  </nav>
+</header>
 
-   <div class="section" id="tarifs">
-       <h2>Nos Tarifs</h2>
-       <table>
-           <tr><th>Type de schéma</th><th>Prix (MAD)</th></tr>
-           <tr><td>Unifilaire</td><td>280</td></tr>
-           <tr><td>Multifilaire</td><td>300</td></tr>
-           <tr><td>Dossier complet</td><td>500</td></tr>
-       </table>
-       <p><strong>Unifilaire :</strong> Schéma simple de distribution électrique.<br>
-          <strong>Multifilaire :</strong> Détail de chaque circuit et appareil.<br>
-          <strong>Dossier complet :</strong> Plan + schémas + tableau + moteur.</p>
-   </div>
+<section id="accueil">
+  <h1>Bienvenue chez ElectroPlan</h1>
+  <p>Spécialiste des plans électriques sur mesure avec visualisation 2D/3D.</p>
+</section>
 
-   <div class="section" id="aide">
-       <h2>Aide</h2>
-       <p>Besoin d’assistance ? Contactez-nous directement sur WhatsApp.</p>
-   </div>
+<section id="services">
+  <h2>Nos services</h2>
+  <ul>
+    <li>Plans unifilaires et multifilaires</li>
+    <li>Visualisations 2D et 3D</li>
+    <li>Schémas de tableaux électriques</li>
+    <li>Plans de contrôle moteur</li>
+    <li>Dossier complet PDF avec légendes</li>
+  </ul>
+</section>
 
-   <div class="section" id="apropos">
-       <h2>À propos de nous</h2>
-       <p>ElectroPlan propose des plans électriques personnalisés, incluant visualisation 2D/3D, schémas, tableaux et contrôle moteur.</p>
-   </div>
+<section id="etapes">
+  <h2>Comment ça marche ?</h2>
+  <ol>
+    <li>Vous remplissez le formulaire de commande</li>
+    <li>Nous réalisons et livrons le plan sous 72h</li>
+    <li>Vous pouvez demander des modifications pendant 30 jours</li>
+  </ol>
+</section>
 
-   <div class="section" id="commander">
-       <h2>Commander</h2>
-       <form onsubmit="envoyerWhatsApp(); return false;">
-           <label>Nom : <input type="text" id="nom"></label><br><br>
-           <label>Email : <input type="email" id="email"></label><br><br>
-           <label>Type :
-               <select id="type">
-                   <option>Villa</option>
-                   <option>Appartement</option>
-                   <option>Bureau</option>
-                   <option>Autres</option>
-               </select>
-           </label><br><br>
-           <button type="submit">Envoyer via WhatsApp</button>
-       </form>
-   </div>
+<section id="galerie">
+  <h2>Galerie de projets</h2>
+  <div class="gallery">
+    <img src="https://via.placeholder.com/300x200" />
+    <img src="https://via.placeholder.com/300x200" />
+    <img src="https://via.placeholder.com/300x200" />
+  </div>
+</section>
 
-   <footer>
-       &copy; ElectroPlan 2025 – Tous droits réservés.
-   </footer>
+<section id="tarifs">
+  <h2>Nos tarifs</h2>
+  <table>
+    <tr><th>Type de schéma</th><th>Prix (MAD)</th><th>Prix (EUR)</th><th>Prix (AED)</th></tr>
+    <tr><td>Unifilaire</td><td>300</td><td>27</td><td>110</td></tr>
+    <tr><td>Multifilaire</td><td>450</td><td>41</td><td>165</td></tr>
+    <tr><td>Dossier complet</td><td>750</td><td>68</td><td>275</td></tr>
+  </table>
+</section>
 
-   <script>
-       function toggleMenu() {
-           document.getElementById('navMenu').classList.toggle('active');
-       }
-       window.addEventListener('scroll', function() {
-           const header = document.getElementById('mainHeader');
-           const logo = document.getElementById('logo');
-           if (window.scrollY > 50) {
-               header.classList.add('scrolled');
-               logo.src = 'foto2.PNG';
-               logo.classList.add('scrolled');
-           } else {
-               header.classList.remove('scrolled');
-               logo.src = 'foto1.PNG';
-               logo.classList.remove('scrolled');
-           }
-       });
-       function envoyerWhatsApp() {
-           const nom = document.getElementById('nom').value;
-           const email = document.getElementById('email').value;
-           const type = document.getElementById('type').value;
-           const message = `Nom: ${nom}%0AEmail: ${email}%0AType: ${type}`;
-           window.open(`https://wa.me/212635978858?text=${message}`, '_blank');
-       }
-   </script>
+<section id="apropos">
+  <h2>À propos de nous</h2>
+  <p>ElectroPlan est une entreprise moderne combinant expertise en électricité et outils numériques pour offrir des plans professionnels, précis et faciles à exploiter sur chantier.</p>
+</section>
+
+<section id="contact">
+  <h2>Contact / Commande</h2>
+  <form>
+    <input type="text" placeholder="Votre nom" required />
+    <input type="email" placeholder="Votre email" required />
+    <input type="text" placeholder="Type de logement (Villa, Appartement...)" />
+    <textarea placeholder="Votre message ou besoin..." required></textarea>
+    <button type="submit">Envoyer</button>
+  </form>
+  <p>Ou contactez-nous directement via <a href="https://wa.me/212600000000" target="_blank">WhatsApp</a>.</p>
+</section>
+
+<footer>
+  &copy; 2025 ElectroPlan – Tous droits réservés.
+</footer>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById("menu");
+    menu.classList.toggle("active");
+  }
+
+  function setLang(lang) {
+    alert("Langue changée vers: " + lang);
+  }
+</script>
+
 </body>
 </html>

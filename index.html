@@ -1,140 +1,188 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ElectroPlan</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #ffffff;
-      color: #333;
-    }
-    header {
-      background-color: #f0f0f0;
-      padding: 1em;
-      text-align: center;
-    }
-    nav {
-      text-align: right;
-      padding: 1em;
-    }
-    nav a {
-      margin: 0 10px;
-      text-decoration: none;
-      color: #007bff;
-    }
-    .tarifs-section {
-      padding: 2em;
-      background-color: #f7f9fb;
-    }
-    .tarifs-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1em;
-    }
-    .tarifs-table th,
-    .tarifs-table td {
-      border: 1px solid #ccc;
-      padding: 0.75em;
-      text-align: left;
-    }
-    .explication-tarifs {
-      margin-top: 1.5em;
-      font-size: 0.95em;
-      background: #eef6ff;
-      padding: 1em;
-      border-radius: 6px;
-    }
-    footer {
-      background-color: #f0f0f0;
-      padding: 1em;
-      text-align: center;
-    }
-  </style>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>ElectroPlan</title>
+   <style>
+       body {
+           font-family: Arial, sans-serif;
+           margin: 0;
+           padding: 0;
+           background-color: #ffffff;
+           color: #333;
+       }
+       header {
+           background-color: #004AAD;
+           padding: 20px;
+           display: flex;
+           align-items: center;
+           justify-content: space-between;
+           position: fixed;
+           width: 100%;
+           top: 0;
+           z-index: 1000;
+       }
+       header img {
+           height: 60px;
+           transition: all 0.3s ease;
+       }
+       nav {
+           display: none;
+           flex-direction: column;
+           background-color: white;
+           position: fixed;
+           top: 0;
+           right: 0;
+           width: 80%;
+           height: 100%;
+           padding: 30px;
+           box-shadow: -2px 0 5px rgba(0,0,0,0.3);
+           z-index: 2000;
+       }
+       nav.active {
+           display: flex;
+       }
+       nav a {
+           text-decoration: none;
+           color: #004AAD;
+           margin: 15px 0;
+           font-size: 18px;
+       }
+       .burger {
+           cursor: pointer;
+           display: block;
+       }
+       .burger div {
+           width: 25px;
+           height: 3px;
+           background-color: white;
+           margin: 5px;
+           transition: all 0.3s ease;
+       }
+       .section {
+           padding: 100px 20px 50px;
+       }
+       .pricing-table {
+           text-align: center;
+           margin: 30px auto;
+       }
+       .pricing-table table {
+           width: 100%;
+           max-width: 600px;
+           margin: auto;
+           border-collapse: collapse;
+       }
+       .pricing-table th, .pricing-table td {
+           border: 1px solid #ccc;
+           padding: 15px;
+       }
+       .form-section form input, .form-section form select {
+           display: block;
+           width: 100%;
+           margin-bottom: 10px;
+           padding: 10px;
+       }
+       .lang-switcher {
+           text-align: center;
+           margin-top: 20px;
+       }
+   </style>
 </head>
 <body>
-  <header>
-    <img src="foto1.PNG" id="logo" alt="Logo ElectroPlan" style="max-width:200px;">
-    <h1>Bienvenue chez ElectroPlan</h1>
-  </header>
 
-  <nav>
-    <a href="#tarifs">Tarifs</a>
-    <a href="#aide">Aide</a>
-    <a href="#apropos">À propos</a>
-    <a href="#commander">Commander</a>
-  </nav>
+<header>
+   <a href="#"><img id="logo" src="foto1.PNG" alt="ElectroPlan Logo"></a>
+   <div class="burger" onclick="toggleMenu()">
+       <div></div>
+       <div></div>
+       <div></div>
+   </div>
+</header>
 
-  <section id="tarifs" class="tarifs-section">
-    <h2>Nos Tarifs</h2>
-    <label for="devise-select">Choisissez une devise :</label>
-    <select id="devise-select" onchange="changerDevise()">
-      <option value="MAD">MAD</option>
-      <option value="EUR">EUR</option>
-      <option value="AED">AED</option>
-    </select>
+<nav id="mobileMenu">
+   <a href="#tarifs">Tarifs</a>
+   <a href="#aide">Aide</a>
+   <a href="#about">À propos de nous</a>
+   <a href="#commander">Commander</a>
+   <div class="lang-switcher">
+       <button onclick="setLang('fr')">Français</button>
+       <button onclick="setLang('en')">English</button>
+       <button onclick="setLang('es')">Español</button>
+       <button onclick="setLang('ar')">عربي</button>
+   </div>
+</nav>
 
-    <table class="tarifs-table">
-      <thead>
-        <tr>
-          <th>Type de Schéma</th>
-          <th>Prix (<span id="devise-label">MAD</span>)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Schéma unifilaire</td>
-          <td id="prix-unifilaire">280</td>
-        </tr>
-        <tr>
-          <td>Schéma multifilaire</td>
-          <td id="prix-multifilaire">300</td>
-        </tr>
-        <tr>
-          <td>Dossier complet (plans + schémas + tableau/moteur)</td>
-          <td id="prix-dossier">500</td>
-        </tr>
-      </tbody>
-    </table>
+<section class="section" id="home">
+   <h1>Bienvenue chez ElectroPlan</h1>
+   <p>Des plans électriques professionnels avec visualisation rapide.</p>
+   <button onclick="document.getElementById('commander').scrollIntoView()">Commander</button>
+</section>
 
-    <div class="explication-tarifs">
-      <h3>Explication :</h3>
-      <ul>
-        <li><strong>Unifilaire :</strong> Représentation simple des circuits avec une ligne par fil.</li>
-        <li><strong>Multifilaire :</strong> Détail complet de chaque fil dans chaque circuit.</li>
-        <li><strong>Dossier complet :</strong> Plan 2D, tous les schémas électriques, tableau et contrôle moteur.</li>
-      </ul>
-    </div>
-  </section>
+<section class="section" id="tarifs">
+   <h2>Nos Tarifs</h2>
+   <div class="pricing-table">
+       <table>
+           <tr><th>Type de Schéma</th><th>Prix (<span id="currency">MAD</span>)</th></tr>
+           <tr><td>Unifilaire</td><td><span class="price" data-mad="280" data-eur="26" data-aed="100">280</span></td></tr>
+           <tr><td>Multifilaire</td><td><span class="price" data-mad="300" data-eur="28" data-aed="110">300</span></td></tr>
+           <tr><td>Dossier Complet</td><td><span class="price" data-mad="500" data-eur="47" data-aed="180">500</span></td></tr>
+       </table>
+       <select onchange="changeCurrency(this.value)">
+           <option value="MAD">MAD</option>
+           <option value="EUR">EUR</option>
+           <option value="AED">AED</option>
+       </select>
+   </div>
+</section>
 
-  <footer>
-    <p>© 2025 ElectroPlan. Tous droits réservés.</p>
-  </footer>
+<section class="section" id="aide">
+   <h2>Aide</h2>
+   <p>Assistance par WhatsApp disponible 24/7 au <a href="https://wa.me/212635978858" target="_blank">+212 635-978858</a></p>
+</section>
 
-  <script>
-    const taux = {
-      MAD: 1,
-      EUR: 0.091,
-      AED: 0.34
-    };
+<section class="section" id="about">
+   <h2>À propos de nous</h2>
+   <p>ElectroPlan est spécialisé dans les plans électriques professionnels au Maroc, Espagne et Dubaï.</p>
+</section>
 
-    const prixBase = {
-      unifilaire: 280,
-      multifilaire: 300,
-      dossier: 500
-    };
+<section class="section form-section" id="commander">
+   <h2>Commander</h2>
+   <form onsubmit="sendWhatsApp(event)">
+       <input type="text" id="name" placeholder="Nom complet" required>
+       <input type="text" id="email" placeholder="Email">
+       <select id="typeLogement" required>
+           <option value="">Type de logement</option>
+           <option value="Villa">Villa</option>
+           <option value="Appartement">Appartement</option>
+           <option value="Bureau">Bureau</option>
+           <option value="Autres">Autres</option>
+       </select>
+       <button type="submit">Envoyer via WhatsApp</button>
+   </form>
+</section>
 
-    function changerDevise() {
-      const devise = document.getElementById("devise-select").value;
-      const tauxChange = taux[devise];
-      document.getElementById("prix-unifilaire").textContent = Math.round(prixBase.unifilaire * tauxChange);
-      document.getElementById("prix-multifilaire").textContent = Math.round(prixBase.multifilaire * tauxChange);
-      document.getElementById("prix-dossier").textContent = Math.round(prixBase.dossier * tauxChange);
-      document.getElementById("devise-label").textContent = devise;
-    }
-  </script>
+<script>
+function toggleMenu() {
+   document.getElementById("mobileMenu").classList.toggle("active");
+}
+
+function changeCurrency(currency) {
+   document.getElementById("currency").textContent = currency;
+   document.querySelectorAll(".price").forEach(el => {
+       el.textContent = el.dataset[currency.toLowerCase()];
+   });
+}
+
+function sendWhatsApp(e) {
+   e.preventDefault();
+   const name = document.getElementById("name").value;
+   const email = document.getElementById("email").value;
+   const type = document.getElementById("typeLogement").value;
+   const message = `Bonjour, je m'appelle ${name}, Email: ${email}, Type de logement: ${type}. Je souhaite commander un plan.`;
+   window.open(`https://wa.me/212635978858?text=${encodeURIComponent(message)}`, '_blank');
+}
+</script>
+
 </body>
 </html>

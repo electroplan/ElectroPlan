@@ -1,161 +1,182 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-   <meta charset="UTF-8" />
-   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <title>ElectroPlan</title>
-   <style>
-       body {
-           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-           margin: 0;
-           padding: 0;
-           background-color: #fff;
-           color: #002147;
-       }
-       header {
-           background-color: #fff;
-           display: flex;
-           align-items: center;
-           justify-content: space-between;
-           padding: 10px 20px;
-           box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-           position: sticky;
-           top: 0;
-           z-index: 999;
-       }
-       header img {
-           height: 40px;
-           transition: all 0.3s ease-in-out;
-       }
-       nav ul {
-           display: flex;
-           list-style: none;
-           gap: 20px;
-       }
-       nav ul li {
-           cursor: pointer;
-       }
-       .lang-switcher {
-           margin-top: 20px;
-           text-align: center;
-       }
-       .lang-switcher button {
-           margin: 0 5px;
-           padding: 5px 10px;
-       }
-       .features {
-           display: flex;
-           justify-content: space-around;
-           margin-top: 30px;
-           padding: 20px;
-       }
-       .features div {
-           text-align: center;
-       }
-       table {
-           width: 90%;
-           margin: 30px auto;
-           border-collapse: collapse;
-           border: 1px solid #ddd;
-       }
-       table th, table td {
-           border: 1px solid #ccc;
-           padding: 10px;
-           text-align: center;
-       }
-       .devise {
-           text-align: center;
-           margin: 20px;
-       }
-       footer {
-           background: #f8f8f8;
-           padding: 30px 20px;
-           text-align: center;
-       }
-   </style>
-   <script>
-       const rates = {
-           'MAD': 1,
-           'EUR': 0.09,
-           'AED': 0.38
-       };
-       function changeCurrency(select) {
-           const currency = select.value;
-           const prices = document.querySelectorAll('.price');
-           prices.forEach(p => {
-               const dh = p.getAttribute('data-mad');
-               p.innerText = Math.round(dh * rates[currency]) + ' ' + currency;
-           });
-       }
-   </script>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>ElectroPlan</title>
+ <style>
+   body {
+     font-family: Arial, sans-serif;
+     margin: 0;
+     padding: 0;
+     background-color: #fff;
+     color: #002b4e;
+   }
+   header, footer {
+     background-color: #f5f5f5;
+     padding: 10px 20px;
+     text-align: center;
+   }
+   .logo {
+     max-width: 200px;
+     display: block;
+     margin: 20px auto;
+   }
+   nav {
+     background-color: white;
+     padding: 10px;
+     box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+     position: sticky;
+     top: 0;
+     z-index: 1000;
+   }
+   nav ul {
+     list-style-type: none;
+     padding: 0;
+     margin: 0;
+     display: flex;
+     justify-content: center;
+     flex-wrap: wrap;
+   }
+   nav ul li {
+     margin: 10px;
+   }
+   nav ul li a {
+     text-decoration: none;
+     color: #002b4e;
+     font-weight: bold;
+   }
+   section {
+     padding: 20px;
+     max-width: 1000px;
+     margin: auto;
+   }
+   table {
+     width: 100%;
+     border-collapse: collapse;
+     margin-top: 20px;
+   }
+   table, th, td {
+     border: 1px solid #ccc;
+   }
+   th, td {
+     padding: 10px;
+     text-align: center;
+   }
+   select {
+     margin-top: 10px;
+     padding: 5px;
+   }
+   .lang-switcher {
+     text-align: center;
+     margin: 10px 0;
+   }
+   .explanation {
+     font-size: 0.9em;
+     margin-top: 10px;
+   }
+ </style>
 </head>
 <body>
-   <header>
-       <img src="foto1.PNG" id="logo" alt="ElectroPlan Logo">
-       <nav>
-           <ul>
-               <li>Nos Tarifs</li>
-               <li>À propos</li>
-               <li>Commander</li>
-           </ul>
-       </nav>
-   </header>
+ <header>
+   <img src="logo.png" alt="ElectroPlan" class="logo" />
+   <div class="lang-switcher">
+     <button>FR</button>
+     <button>EN</button>
+     <button>ES</button>
+     <button>AR</button>
+   </div>
+ </header>
 
-   <section class="features">
-       <div>
-           <p>⏱️</p>
-           <p>Prêt jusqu’à 72h</p>
-       </div>
-       <div>
-           <p>✏️</p>
-           <p>Modifications 30 jours</p>
-       </div>
-       <div>
-           <p>📄</p>
-           <p>Rapport PDF inclus</p>
-       </div>
-   </section>
+ <nav>
+   <ul>
+     <li><a href="#tarifs">Nos Tarifs</a></li>
+     <li><a href="#about">À propos</a></li>
+     <li><a href="#commande">Commander</a></li>
+   </ul>
+ </nav>
 
-   <section class="devise">
-       <label for="devise">Devise : </label>
-       <select onchange="changeCurrency(this)" id="devise">
-           <option value="MAD">DH</option>
-           <option value="EUR">€</option>
-           <option value="AED">AED</option>
-       </select>
-   </section>
+ <section>
+   <h2>Création de plans électriques sur mesure</h2>
+   <p>Prêt sous 72h • Modifications jusqu’à 30 jours • Rapport PDF inclus</p>
+   <button>Commander</button>
 
-   <section class="pricing">
-       <table>
-           <tr>
-               <th>Service</th>
-               <th>Prix</th>
-               <th>Inclus</th>
-           </tr>
-           <tr>
-               <td>Dossier complet</td>
-               <td class="price" data-mad="500">500 MAD</td>
-               <td>Plans + schémas + tableaux + moteur</td>
-           </tr>
-           <tr>
-               <td>Installation simple</td>
-               <td class="price" data-mad="300">300 MAD</td>
-               <td>Schéma + tableau</td>
-           </tr>
-           <tr>
-               <td>Contrôle moteur</td>
-               <td class="price" data-mad="280">280 MAD</td>
-               <td>Schéma moteur seul</td>
-           </tr>
-       </table>
-       <p style="text-align:center; margin-top: 10px;"><strong>Explications :</strong><br/>
-       <em>Unifilaire</em> : plan simple. <em>Multifilaire</em> : plus détaillé.<br/>
-       <em>Dossier complet</em> : tous les plans + moteur + tableau.</p>
-   </section>
+   <h3 id="tarifs">Nos Tarifs</h3>
+   <label for="devise">Devise :</label>
+   <select id="devise" onchange="convertPrices()">
+     <option value="MAD">MAD</option>
+     <option value="EUR">EUR</option>
+     <option value="AED">AED</option>
+   </select>
 
-   <footer>
-       <p>ElectroPlan est spécialisé dans la création de plans électriques professionnels avec visualisation 2D/3D pour logements, projets tertiaires et industriels. Nous intervenons au Maroc, à Dubaï et en Espagne.</p>
-       <p>Contactez-nous directement via WhatsApp</p>
-   </footer>
+   <table>
+     <tr>
+       <th>Service</th>
+       <th>Prix</th>
+       <th>Inclus</th>
+     </tr>
+     <tr>
+       <td>Dossier complet</td>
+       <td class="price" data-mad="500">500 MAD</td>
+       <td>Plans + schémas + tableaux + moteur</td>
+     </tr>
+     <tr>
+       <td>Installation simple</td>
+       <td class="price" data-mad="300">300 MAD</td>
+       <td>Schéma + tableau</td>
+     </tr>
+     <tr>
+       <td>Contrôle moteur</td>
+       <td class="price" data-mad="280">280 MAD</td>
+       <td>Schéma moteur seul</td>
+     </tr>
+   </table>
+
+   <div class="explanation">
+     <strong>Explications :</strong><br/>
+     <em>Unifilaire</em> : plan simple.<br/>
+     <em>Multifilaire</em> : plus détaillé.<br/>
+     <em>Dossier complet</em> : tous les plans + moteur + tableau.
+   </div>
+ </section>
+
+ <section id="about">
+   <h3>À propos de nous</h3>
+   <p>ElectroPlan est spécialisé dans la création de plans électriques professionnels avec visualisation 2D/3D. Nous intervenons au Maroc, à Dubaï et en Espagne.</p>
+ </section>
+
+ <section id="commande">
+   <h3>Commander</h3>
+   <form>
+     <label for="logement">Type de logement :</label>
+     <select id="logement" name="logement">
+       <option value="villa">Villa</option>
+       <option value="appartement">Appartement</option>
+       <option value="bureau">Bureau</option>
+       <option value="autres">Autres</option>
+     </select>
+   </form>
+ </section>
+
+ <footer>
+   <p>Contact via WhatsApp | © ElectroPlan</p>
+ </footer>
+
+ <script>
+   const conversion = {
+     MAD: 1,
+     EUR: 0.091,
+     AED: 0.36
+   };
+
+   function convertPrices() {
+     const selected = document.getElementById('devise').value;
+     document.querySelectorAll('.price').forEach(td => {
+       const mad = td.getAttribute('data-mad');
+       const newPrice = (mad * conversion[selected]).toFixed(2);
+       td.textContent = newPrice + ' ' + selected;
+     });
+   }
+ </script>
 </body>
 </html>

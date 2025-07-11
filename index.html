@@ -1,141 +1,140 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
- <meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1.0" />
- <title>ElectroPlan</title>
- <style>
-   body { margin: 0; font-family: 'Segoe UI', sans-serif; scroll-behavior: smooth; }
-   header { position: fixed; top: 0; left: 0; width: 100%; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1000; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
-   .logo { font-weight: bold; font-size: 1.5em; color: #005baa; }
-   .hamburger { cursor: pointer; display: block; width: 25px; }
-   .hamburger div { height: 3px; background: #000; margin: 5px 0; }
-   nav { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; background: white; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: left 0.3s ease; box-shadow: 2px 0 10px rgba(0,0,0,0.1); }
-   nav.active { left: 0; }
-   nav a { margin: 20px 0; text-decoration: none; font-size: 1.2em; color: #005baa; }
-   .language-switcher { position: absolute; bottom: 30px; text-align: center; }
-   .language-switcher button { margin: 0 5px; padding: 5px 10px; }
-
-   section { padding: 100px 20px 60px; max-width: 1000px; margin: auto; }
-   h1, h2 { color: #005baa; }
-
-   .gallery img { width: 30%; margin: 1%; border-radius: 8px; cursor: pointer; }
-
-   table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-   table, th, td { border: 1px solid #ccc; }
-   th, td { padding: 12px; text-align: center; }
-
-   form input, form textarea { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; }
-   form button { padding: 10px 20px; background: #005baa; color: white; border: none; border-radius: 4px; cursor: pointer; }
-
-   footer { background: #f5f5f5; padding: 20px; text-align: center; color: #555; }
-
-   @media(min-width: 768px) {
-     .hamburger { display: none; }
-     nav { position: static; height: auto; flex-direction: row; justify-content: flex-end; box-shadow: none; }
-     nav a { margin: 0 15px; }
-   }
- </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ElectroPlan</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      color: #333;
+    }
+    header {
+      background-color: #f0f0f0;
+      padding: 1em;
+      text-align: center;
+    }
+    nav {
+      text-align: right;
+      padding: 1em;
+    }
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #007bff;
+    }
+    .tarifs-section {
+      padding: 2em;
+      background-color: #f7f9fb;
+    }
+    .tarifs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1em;
+    }
+    .tarifs-table th,
+    .tarifs-table td {
+      border: 1px solid #ccc;
+      padding: 0.75em;
+      text-align: left;
+    }
+    .explication-tarifs {
+      margin-top: 1.5em;
+      font-size: 0.95em;
+      background: #eef6ff;
+      padding: 1em;
+      border-radius: 6px;
+    }
+    footer {
+      background-color: #f0f0f0;
+      padding: 1em;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
+  <header>
+    <img src="foto1.PNG" id="logo" alt="Logo ElectroPlan" style="max-width:200px;">
+    <h1>Bienvenue chez ElectroPlan</h1>
+  </header>
 
-<header>
- <div class="logo">ElectroPlan</div>
- <div class="hamburger" onclick="toggleMenu()">
-   <div></div><div></div><div></div>
- </div>
- <nav id="menu">
-   <a href="#accueil" onclick="toggleMenu()">Accueil</a>
-   <a href="#services" onclick="toggleMenu()">Services</a>
-   <a href="#etapes" onclick="toggleMenu()">Étapes</a>
-   <a href="#galerie" onclick="toggleMenu()">Galerie</a>
-   <a href="#tarifs" onclick="toggleMenu()">Tarifs</a>
-   <a href="#apropos" onclick="toggleMenu()">À propos</a>
-   <a href="#contact" onclick="toggleMenu()">Contact</a>
-   <div class="language-switcher">
-     <button onclick="setLang('fr')">FR</button>
-     <button onclick="setLang('en')">EN</button>
-     <button onclick="setLang('es')">ES</button>
-     <button onclick="setLang('ar')">AR</button>
-   </div>
- </nav>
-</header>
+  <nav>
+    <a href="#tarifs">Tarifs</a>
+    <a href="#aide">Aide</a>
+    <a href="#apropos">À propos</a>
+    <a href="#commander">Commander</a>
+  </nav>
 
-<section id="accueil">
- <h1>Bienvenue chez ElectroPlan</h1>
- <p>Spécialiste des plans électriques sur mesure avec visualisation 2D/3D.</p>
-</section>
+  <section id="tarifs" class="tarifs-section">
+    <h2>Nos Tarifs</h2>
+    <label for="devise-select">Choisissez une devise :</label>
+    <select id="devise-select" onchange="changerDevise()">
+      <option value="MAD">MAD</option>
+      <option value="EUR">EUR</option>
+      <option value="AED">AED</option>
+    </select>
 
-<section id="services">
- <h2>Nos services</h2>
- <ul>
-   <li>Plans unifilaires et multifilaires</li>
-   <li>Visualisations 2D et 3D</li>
-   <li>Schémas de tableaux électriques</li>
-   <li>Plans de contrôle moteur</li>
-   <li>Dossier complet PDF avec légendes</li>
- </ul>
-</section>
+    <table class="tarifs-table">
+      <thead>
+        <tr>
+          <th>Type de Schéma</th>
+          <th>Prix (<span id="devise-label">MAD</span>)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Schéma unifilaire</td>
+          <td id="prix-unifilaire">280</td>
+        </tr>
+        <tr>
+          <td>Schéma multifilaire</td>
+          <td id="prix-multifilaire">300</td>
+        </tr>
+        <tr>
+          <td>Dossier complet (plans + schémas + tableau/moteur)</td>
+          <td id="prix-dossier">500</td>
+        </tr>
+      </tbody>
+    </table>
 
-<section id="etapes">
- <h2>Comment ça marche ?</h2>
- <ol>
-   <li>Vous remplissez le formulaire de commande</li>
-   <li>Nous réalisons et livrons le plan sous 72h</li>
-   <li>Vous pouvez demander des modifications pendant 30 jours</li>
- </ol>
-</section>
+    <div class="explication-tarifs">
+      <h3>Explication :</h3>
+      <ul>
+        <li><strong>Unifilaire :</strong> Représentation simple des circuits avec une ligne par fil.</li>
+        <li><strong>Multifilaire :</strong> Détail complet de chaque fil dans chaque circuit.</li>
+        <li><strong>Dossier complet :</strong> Plan 2D, tous les schémas électriques, tableau et contrôle moteur.</li>
+      </ul>
+    </div>
+  </section>
 
-<section id="galerie">
- <h2>Galerie de projets</h2>
- <div class="gallery">
-   <img src="https://via.placeholder.com/300x200" />
-   <img src="https://via.placeholder.com/300x200" />
-   <img src="https://via.placeholder.com/300x200" />
- </div>
-</section>
+  <footer>
+    <p>© 2025 ElectroPlan. Tous droits réservés.</p>
+  </footer>
 
-<section id="tarifs">
- <h2>Nos tarifs</h2>
- <table>
-   <tr><th>Type de schéma</th><th>Prix (MAD)</th><th>Prix (EUR)</th><th>Prix (AED)</th></tr>
-   <tr><td>Unifilaire</td><td>300</td><td>27</td><td>110</td></tr>
-   <tr><td>Multifilaire</td><td>450</td><td>41</td><td>165</td></tr>
-   <tr><td>Dossier complet</td><td>750</td><td>68</td><td>275</td></tr>
- </table>
-</section>
+  <script>
+    const taux = {
+      MAD: 1,
+      EUR: 0.091,
+      AED: 0.34
+    };
 
-<section id="apropos">
- <h2>À propos de nous</h2>
- <p>ElectroPlan est une entreprise moderne combinant expertise en électricité et outils numériques pour offrir des plans professionnels, précis et faciles à exploiter sur chantier.</p>
-</section>
+    const prixBase = {
+      unifilaire: 280,
+      multifilaire: 300,
+      dossier: 500
+    };
 
-<section id="contact">
- <h2>Contact / Commande</h2>
- <form>
-   <input type="text" placeholder="Votre nom" required />
-   <input type="email" placeholder="Votre email" required />
-   <input type="text" placeholder="Type de logement (Villa, Appartement...)" />
-   <textarea placeholder="Votre message ou besoin..." required></textarea>
-   <button type="submit">Envoyer</button>
- </form>
- <p>Ou contactez-nous directement via <a href="https://wa.me/212600000000" target="_blank">WhatsApp</a>.</p>
-</section>
-
-<footer>
- &copy; 2025 ElectroPlan – Tous droits réservés.
-</footer>
-
-<script>
- function toggleMenu() {
-   const menu = document.getElementById("menu");
-   menu.classList.toggle("active");
- }
-
- function setLang(lang) {
-   alert("Langue changée vers: " + lang);
- }
-</script>
-
+    function changerDevise() {
+      const devise = document.getElementById("devise-select").value;
+      const tauxChange = taux[devise];
+      document.getElementById("prix-unifilaire").textContent = Math.round(prixBase.unifilaire * tauxChange);
+      document.getElementById("prix-multifilaire").textContent = Math.round(prixBase.multifilaire * tauxChange);
+      document.getElementById("prix-dossier").textContent = Math.round(prixBase.dossier * tauxChange);
+      document.getElementById("devise-label").textContent = devise;
+    }
+  </script>
 </body>
 </html>

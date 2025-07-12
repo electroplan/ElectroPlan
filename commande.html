@@ -4,188 +4,139 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Commander - ElectroPlan</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body, html {
+    body {
       margin: 0;
-      padding: 0;
       font-family: 'Segoe UI', sans-serif;
       background: #f9f9f9;
     }
 
-    header {
-      background: white;
-      padding: 15px 30px;
+    .hero-banner {
+      background-image: url('Background-commande.PNG');
+      background-size: cover;
+      background-position: center;
+      height: 70vh;
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      flex-direction: column;
+      justify-content: center;
+      padding: 20px;
+      color: white;
     }
 
-    .logo {
+    .header-top {
       display: flex;
       align-items: center;
-      text-decoration: none;
+      gap: 10px;
+      margin-bottom: 15px;
     }
 
-    .logo img {
+    .header-top img {
       height: 50px;
-      margin-right: 10px;
     }
 
-    .logo-text {
-      font-size: 1.2em;
-      font-weight: bold;
-      color: #003366;
+    .header-top h1 {
+      margin: 0;
+      font-size: 24px;
     }
 
     .back-button {
       background-color: #003366;
       color: white;
       padding: 10px 20px;
-      text-decoration: none;
+      border: none;
       border-radius: 6px;
-      transition: background 0.3s ease;
+      text-decoration: none;
+      font-weight: bold;
+      width: fit-content;
     }
 
-    .back-button:hover {
-      background-color: #002244;
-    }
-
-    .banner {
-      background-image: url('Background-commande.PNG');
-      background-size: cover;
-      background-position: center;
-      height: 60vh;
-    }
-
-    .form-container {
-      background-color: white;
-      margin: -50px auto 30px auto;
+    .form-section {
+      background: white;
+      max-width: 700px;
+      margin: -80px auto 40px auto;
       padding: 30px;
-      max-width: 600px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      border-radius: 10px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     }
 
-    h2 {
-      text-align: center;
-      color: #003366;
+    .form-section h2 {
       margin-bottom: 20px;
+      color: #003366;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
     }
 
     label {
       display: block;
-      margin-top: 15px;
-      color: #333;
+      margin-bottom: 6px;
+      font-weight: bold;
     }
 
     input, select, textarea {
       width: 100%;
       padding: 10px;
-      margin-top: 5px;
-      border-radius: 5px;
+      border-radius: 6px;
       border: 1px solid #ccc;
     }
 
-    button {
-      margin-top: 20px;
+    .submit-button {
       background-color: #003366;
       color: white;
+      padding: 12px 20px;
       border: none;
-      padding: 12px;
-      width: 100%;
-      border-radius: 5px;
-      font-size: 1em;
+      border-radius: 6px;
+      font-size: 16px;
       cursor: pointer;
     }
 
-    button:hover {
+    .submit-button:hover {
       background-color: #002244;
-    }
-
-    @media screen and (max-width: 600px) {
-      .form-container {
-        margin: -50px 15px 30px 15px;
-      }
-
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .back-button {
-        margin-top: 10px;
-      }
     }
   </style>
 </head>
 <body>
-
-  <!-- En-tête avec logo et bouton retour -->
-  <header>
-    <a href="index.html" class="logo">
-      <img src="foto1.PNG" alt="Logo ElectroPlan">
-      <span class="logo-text">ElectroPlan</span>
-    </a>
-    <a href="index.html" class="back-button">← Retour à l’accueil</a>
-  </header>
-
-  <!-- Bannière image -->
-  <div class="banner"></div>
-
-  <!-- Formulaire -->
-  <div class="form-container">
-    <h2>Formulaire de commande</h2>
-    <form id="commandeForm" onsubmit="envoyerCommande(event)">
-      <label for="nom">Nom complet</label>
-      <input type="text" id="nom" name="nom" required />
-
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" required />
-
-      <label for="telephone">Téléphone</label>
-      <input type="tel" id="telephone" name="telephone" required />
-
-      <label for="type">Type de logement</label>
-      <select id="type" name="type">
-        <option value="Villa">Villa</option>
-        <option value="Appartement">Appartement</option>
-        <option value="Bureau">Bureau</option>
-        <option value="Terrain">Terrain</option>
-        <option value="Autres">Autres</option>
-      </select>
-
-      <label for="surface">Surface en m²</label>
-      <input type="number" id="surface" name="surface" required />
-
-      <label for="details">Détails du projet</label>
-      <textarea id="details" name="details" rows="4" placeholder="Décrivez votre projet..."></textarea>
-
-      <button type="submit">Envoyer la commande</button>
-    </form>
+  <div class="hero-banner">
+    <div class="header-top">
+      <a href="index.html"><img src="logo.png" alt="ElectroPlan Logo"></a>
+      <h1>ElectroPlan</h1>
+    </div>
+    <a class="back-button" href="index.html">← Retour à l’accueil</a>
   </div>
 
-  <script>
-    function envoyerCommande(event) {
-      event.preventDefault();
-      const nom = document.getElementById("nom").value;
-      const tel = document.getElementById("telephone").value;
-      const type = document.getElementById("type").value;
-      const surface = document.getElementById("surface").value;
-      const details = document.getElementById("details").value;
-
-      const message = `Bonjour, je souhaite commander un plan électrique.\n\nNom: ${nom}\nTéléphone: ${tel}\nType: ${type}\nSurface: ${surface} m²\nDétails: ${details}`;
-      const whatsappURL = `https://wa.me/212635978858?text=${encodeURIComponent(message)}`;
-      window.open(whatsappURL, "_blank");
-    }
-  </script>
-
+  <div class="form-section">
+    <h2>Formulaire de commande</h2>
+    <form>
+      <div class="form-group">
+        <label for="nom">Nom complet</label>
+        <input type="text" id="nom" name="nom" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Adresse e-mail</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="type">Type de logement</label>
+        <select id="type" name="type">
+          <option>Villa</option>
+          <option>Appartement</option>
+          <option>Bureau</option>
+          <option>Terrain</option>
+          <option>Autres</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="surface">Combien de m² ?</label>
+        <input type="number" id="surface" name="surface" placeholder="ex: 120" required>
+      </div>
+      <div class="form-group">
+        <label for="details">Détails ou demandes spécifiques</label>
+        <textarea id="details" name="details" rows="4"></textarea>
+      </div>
+      <button class="submit-button" type="submit">Envoyer</button>
+    </form>
+  </div>
 </body>
 </html>

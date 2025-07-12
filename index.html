@@ -2,9 +2,9 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ElectroPlan</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElectroPlan - Accueil</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     body {
       margin: 0;
@@ -12,212 +12,139 @@
       background-color: #ffffff;
       color: #333;
     }
+
     header {
-      position: fixed;
-      width: 100%;
-      top: 0;
-      left: 0;
-      background: white;
-      z-index: 999;
-      transition: all 0.3s ease;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
+      padding: 15px 30px;
+      background-color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
-    .logo img {
+
+    header img.logo {
       height: 50px;
       transition: all 0.3s ease;
     }
-    .scrolled .logo img {
-      height: 35px;
-    }
-    .menu-btn {
-      font-size: 24px;
-      cursor: pointer;
-    }
-    nav {
-      display: none;
-      flex-direction: column;
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 100%;
-      height: 100vh;
-      background: #fff;
-      box-shadow: -2px 0 5px rgba(0,0,0,0.2);
-      padding: 20px;
-    }
-    nav.active {
-      display: flex;
-    }
-    nav a {
-      margin: 20px 0;
-      text-decoration: none;
-      font-size: 20px;
-      color: #333;
-    }
-    .close-btn {
-      align-self: flex-end;
-      font-size: 24px;
-      cursor: pointer;
-    }
-    .lang-switcher {
-      margin-top: auto;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-    }
-    section {
-      padding: 100px 20px 20px;
-    }
+
     .hero {
       text-align: center;
-      padding-top: 80px;
+      padding: 100px 20px 60px;
+      background: linear-gradient(to bottom right, #005aa7, #fffde4);
     }
+
+    .hero h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      color: #003366;
+    }
+
+    .hero p {
+      font-size: 1.2em;
+      color: #333;
+    }
+
+    .btn-commander {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 15px 30px;
+      background-color: #ffcc00;
+      color: #003366;
+      font-weight: bold;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1.1em;
+      transition: background 0.3s;
+    }
+
+    .btn-commander:hover {
+      background-color: #ffd633;
+    }
+
     .features {
       display: flex;
-      justify-content: space-around;
-      margin-top: 20px;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 40px;
+      flex-wrap: wrap;
     }
+
     .feature {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 150px;
       text-align: center;
-      width: 30%;
     }
-    .pricing {
-      text-align: center;
+
+    .feature i {
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: #003366;
     }
-    table {
-      margin: auto;
-      border-collapse: collapse;
-      width: 80%;
+
+    .feature span {
+      font-size: 1em;
+      color: #003366;
     }
-    th, td {
-      padding: 10px;
-      border: 1px solid #ccc;
-    }
-    .explanation {
-      max-width: 600px;
-      margin: 20px auto;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #f1f1f1;
-      font-size: 14px;
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2em;
+      }
+      .btn-commander {
+        padding: 12px 20px;
+        font-size: 1em;
+      }
     }
   </style>
 </head>
 <body>
-<header id="header">
-  <div class="logo">
-    <a href="#home"><img id="logo" src="foto1.PNG" alt="ElectroPlan Logo"/></a>
-  </div>
-  <div class="menu-btn" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
-</header>
 
-<nav id="menu">
-  <div class="close-btn" onclick="toggleMenu()"><i class="fas fa-times"></i></div>
-  <a href="#tarifs" data-i18n="tarifs">Tarifs</a>
-  <a href="#aide" data-i18n="aide">Aide</a>
-  <a href="#apropos" data-i18n="apropos">À propos de nous</a>
-  <a href="#commande" data-i18n="commander">Commander</a>
-  <div class="lang-switcher">
-    <button onclick="setLanguage('fr')">Français</button>
-    <button onclick="setLanguage('en')">English</button>
-    <button onclick="setLanguage('ar')">عربي</button>
-    <button onclick="setLanguage('es')">Español</button>
-  </div>
-</nav>
+  <header>
+    <a href="index.html"><img src="foto1.PNG" alt="ElectroPlan Logo" class="logo" id="logo"></a>
+    <nav>
+      <!-- Ajoute le menu ici si besoin -->
+    </nav>
+  </header>
 
-<section class="hero" id="home">
-  <h1 data-i18n="welcome">Bienvenue chez ElectroPlan</h1>
-  <button onclick="document.getElementById('commande').scrollIntoView();" data-i18n="commander">Commander</button>
-  <div class="features">
-    <div class="feature"><i class="fas fa-clock"></i><p data-i18n="ready72">Prêt sous 72h</p></div>
-    <div class="feature"><i class="fas fa-edit"></i><p data-i18n="mod30">Modifications jusqu’à 30 jours</p></div>
-    <div class="feature"><i class="fas fa-file-pdf"></i><p data-i18n="pdfreport">Avec rapport PDF</p></div>
-  </div>
-</section>
+  <section class="hero">
+    <h1>Bienvenue chez ElectroPlan</h1>
+    <p>Des plans électriques professionnels, rapides et personnalisés.</p>
+    <a href="commande.html" class="btn-commander">Commander</a>
 
-<section class="pricing" id="tarifs">
-  <h2 data-i18n="tarifs">Nos Tarifs</h2>
-  <table>
-    <tr><th>Type</th><th>Prix</th></tr>
-    <tr><td>Schéma unifilaire</td><td><span class="price" data-mad="280" data-eur="26" data-aed="100">280 MAD</span></td></tr>
-    <tr><td>Schéma multifilaire</td><td><span class="price" data-mad="300" data-eur="28" data-aed="110">300 MAD</span></td></tr>
-    <tr><td>Dossier complet</td><td><span class="price" data-mad="500" data-eur="47" data-aed="180">500 MAD</span></td></tr>
-  </table>
-  <div class="lang-switcher">
-    <button onclick="convertPrices('mad')">MAD</button>
-    <button onclick="convertPrices('eur')">EUR</button>
-    <button onclick="convertPrices('aed')">AED</button>
-  </div>
-  <div class="explanation">
-    <p><strong>Schéma unifilaire :</strong> vue simplifiée.</p>
-    <p><strong>Schéma multifilaire :</strong> connexions détaillées.</p>
-    <p><strong>Dossier complet :</strong> plans + tableau + moteur.</p>
-  </div>
-</section>
+    <div class="features">
+      <div class="feature">
+        <i class="fas fa-clock"></i>
+        <span>Prêt jusqu’à 72h</span>
+      </div>
+      <div class="feature">
+        <i class="fas fa-edit"></i>
+        <span>Modifications permises 30 jours</span>
+      </div>
+      <div class="feature">
+        <i class="fas fa-file-pdf"></i>
+        <span>Avec rapports PDF</span>
+      </div>
+    </div>
+  </section>
 
-<section id="commande">
-  <h2 data-i18n="commander">Commander</h2>
-  <form onsubmit="sendToWhatsApp(event)">
-    <input type="text" placeholder="Nom" required />
-    <select required>
-      <option value="Villa">Villa</option>
-      <option value="Appartement">Appartement</option>
-      <option value="Bureau">Bureau</option>
-      <option value="Autres">Autres</option>
-    </select>
-    <textarea placeholder="Message / Détails..."></textarea>
-    <button type="submit" data-i18n="envoyer">Envoyer via WhatsApp</button>
-  </form>
-</section>
+  <script>
+    // Animation de changement de logo au scroll
+    const logo = document.getElementById('logo');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        logo.src = 'foto2.PNG';
+        logo.style.height = '35px';
+      } else {
+        logo.src = 'foto1.PNG';
+        logo.style.height = '50px';
+      }
+    });
+  </script>
 
-<footer>© 2025 ElectroPlan. Tous droits réservés.</footer>
-
-<script>
-function toggleMenu() {
-  document.getElementById("menu").classList.toggle("active");
-}
-function convertPrices(currency) {
-  document.querySelectorAll('.price').forEach(span => {
-    span.textContent = span.dataset[currency] + ' ' + currency.toUpperCase();
-  });
-}
-function sendToWhatsApp(e) {
-  e.preventDefault();
-  const name = document.querySelector('form input').value;
-  const type = document.querySelector('form select').value;
-  const msg = document.querySelector('form textarea').value;
-  const url = 'https://wa.me/212635978858?text=' + encodeURIComponent(\`Nom: \${name}, Type: \${type}, Message: \${msg}\`);
-  window.open(url, '_blank');
-}
-window.addEventListener('scroll', () => {
-  const header = document.getElementById('header');
-  const logo = document.getElementById('logo');
-  if (window.scrollY > 50) {
-    header.classList.add('scrolled');
-    logo.src = 'foto2.PNG';
-  } else {
-    header.classList.remove('scrolled');
-    logo.src = 'foto1.PNG';
-  }
-});
-const translations = {
-  en: { tarifs:"Pricing", aide:"Help", apropos:"About", commander:"Order", welcome:"Welcome", ready72:"Ready in 72h", mod30:"Changes 30 days", pdfreport:"With PDF", envoyer:"Send via WhatsApp" },
-  es: { tarifs:"Tarifas", aide:"Ayuda", apropos:"Sobre nosotros", commander:"Pedir", welcome:"Bienvenido", ready72:"Listo en 72h", mod30:"Cambios 30 días", pdfreport:"Con informe PDF", envoyer:"Enviar por WhatsApp" },
-  ar: { tarifs:"الأسعار", aide:"مساعدة", apropos:"معلومات عنا", commander:"طلب", welcome:"مرحبا", ready72:"جاهز خلال 72 ساعة", mod30:"تعديلات لمدة 30 يوم", pdfreport:"مع تقرير PDF", envoyer:"إرسال عبر واتساب" }
-};
-function setLanguage(lang) {
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.dataset.i18n;
-    if (translations[lang][key]) {
-      el.textContent = translations[lang][key];
-    }
-  });
-}
-</script>
 </body>
 </html>

@@ -3,99 +3,188 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ElectroPlan - Commander</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Commander - ElectroPlan</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+    * {
+      box-sizing: border-box;
     }
-    .header {
-      background-image: url('background.jpg');
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9f9f9;
+    }
+
+    header {
+      background: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo img {
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .logo-text {
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #003366;
+    }
+
+    .back-button {
+      background-color: #003366;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #002244;
+    }
+
+    .banner {
+      background-image: url('background-commande.jpg');
       background-size: cover;
       background-position: center;
       height: 60vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
-    .header h1 {
-      color: white;
-      font-size: 3em;
-      background-color: rgba(0, 0, 0, 0.6);
-      padding: 20px;
-      border-radius: 10px;
-    }
+
     .form-container {
       background-color: white;
-      max-width: 500px;
-      margin: 40px auto;
+      margin: -50px auto 30px auto;
       padding: 30px;
+      max-width: 600px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    .form-container h2 {
-      margin-bottom: 20px;
+
+    h2 {
+      text-align: center;
       color: #003366;
+      margin-bottom: 20px;
     }
+
     label {
       display: block;
       margin-top: 15px;
-      font-weight: bold;
+      color: #333;
     }
+
     input, select, textarea {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
-      border: 1px solid #ccc;
       border-radius: 5px;
+      border: 1px solid #ccc;
     }
+
     button {
       margin-top: 20px;
-      padding: 12px 20px;
       background-color: #003366;
       color: white;
       border: none;
+      padding: 12px;
+      width: 100%;
       border-radius: 5px;
+      font-size: 1em;
       cursor: pointer;
     }
+
     button:hover {
-      background-color: #0055a5;
+      background-color: #002244;
+    }
+
+    @media screen and (max-width: 600px) {
+      .form-container {
+        margin: -50px 15px 30px 15px;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .back-button {
+        margin-top: 10px;
+      }
     }
   </style>
 </head>
 <body>
-<header style="background: white; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000;">
-  <a href="index.html">
-    <img src="foto1.PNG" alt="Logo ElectroPlan" style="height: 50px;">
-  </a>
-  <a href="index.html" style="text-decoration: none; color: #003366; font-weight: bold; font-size: 1.1em;">Retour à l'accueil</a>
-</header>
-  <div class="header">
-    <h1>Commander un plan électrique</h1>
-  </div>
+
+  <!-- En-tête avec logo et bouton retour -->
+  <header>
+    <a href="index.html" class="logo">
+      <img src="foto1.PNG" alt="Logo ElectroPlan">
+      <span class="logo-text">ElectroPlan</span>
+    </a>
+    <a href="index.html" class="back-button">← Retour à l’accueil</a>
+  </header>
+
+  <!-- Bannière image -->
+  <div class="banner"></div>
+
+  <!-- Formulaire -->
   <div class="form-container">
     <h2>Formulaire de commande</h2>
-    <form action="https://wa.me/212635978858" method="get" target="_blank">
-      <label for="type">Type de logement :</label>
+    <form id="commandeForm" onsubmit="envoyerCommande(event)">
+      <label for="nom">Nom complet</label>
+      <input type="text" id="nom" name="nom" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="telephone">Téléphone</label>
+      <input type="tel" id="telephone" name="telephone" required />
+
+      <label for="type">Type de logement</label>
       <select id="type" name="type">
         <option value="Villa">Villa</option>
         <option value="Appartement">Appartement</option>
         <option value="Bureau">Bureau</option>
-        <option value="Terrain">Terrain</option>
         <option value="Autres">Autres</option>
       </select>
 
-      <label for="surface">Combien de m² ?</label>
-      <input type="number" id="surface" name="surface" placeholder="Ex: 120" />
+      <label for="surface">Surface en m²</label>
+      <input type="number" id="surface" name="surface" required />
 
-      <label for="details">Détails supplémentaires :</label>
-      <textarea id="details" name="details" rows="4" placeholder="Indiquez vos besoins..."></textarea>
+      <label for="details">Détails du projet</label>
+      <textarea id="details" name="details" rows="4" placeholder="Décrivez votre projet..."></textarea>
 
       <button type="submit">Envoyer la commande</button>
     </form>
   </div>
+
+  <script>
+    function envoyerCommande(event) {
+      event.preventDefault();
+      const nom = document.getElementById("nom").value;
+      const tel = document.getElementById("telephone").value;
+      const type = document.getElementById("type").value;
+      const surface = document.getElementById("surface").value;
+      const details = document.getElementById("details").value;
+
+      const message = `Bonjour, je souhaite commander un plan électrique.\n\nNom: ${nom}\nTéléphone: ${tel}\nType: ${type}\nSurface: ${surface} m²\nDétails: ${details}`;
+      const whatsappURL = `https://wa.me/212635978858?text=${encodeURIComponent(message)}`;
+      window.open(whatsappURL, "_blank");
+    }
+  </script>
 
 </body>
 </html>

@@ -1,303 +1,153 @@
 <!DOCTYPE html>
-
 <html lang="fr">
-
 <head>
-
- <meta charset="UTF-8" />
-
- <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
- <title>ElectroPlan</title>
-
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
- <style>
-
-   body {
-
-     font-family: 'Segoe UI', sans-serif;
-
-     margin: 0;
-
-     background-color: #ffffff;
-
-     color: #1f1f1f;
-
-   }
-
-   header {
-
-     position: fixed;
-
-     width: 100%;
-
-     background-color: #fff;
-
-     display: flex;
-
-     justify-content: space-between;
-
-     align-items: center;
-
-     padding: 10px 20px;
-
-     z-index: 1000;
-
-     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-
-   }
-
-   header img {
-
-     height: 60px;
-
-     transition: height 0.3s;
-
-   }
-
-   .menu-btn {
-
-     font-size: 26px;
-
-     cursor: pointer;
-
-   }
-
-   .menu {
-
-     position: fixed;
-
-     top: 0;
-
-     right: -100%;
-
-     width: 100%;
-
-     height: 100%;
-
-     background: white;
-
-     display: flex;
-
-     flex-direction: column;
-
-     justify-content: center;
-
-     align-items: center;
-
-     transition: right 0.3s;
-
-     z-index: 999;
-
-   }
-
-   .menu.active {
-
-     right: 0;
-
-   }
-
-   .menu a {
-
-     font-size: 24px;
-
-     margin: 20px;
-
-     color: #000;
-
-     text-decoration: none;
-
-   }
-
-   .lang-switcher {
-
-     position: absolute;
-
-     bottom: 20px;
-
-     text-align: center;
-
-   }
-
-   .lang-switcher button {
-
-     margin: 0 5px;
-
-     padding: 5px 10px;
-
-   }
-
- </style>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ElectroPlan</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #ffffff;
+      color: #1f1f1f;
+    }
+    header {
+      position: fixed;
+      width: 100%;
+      background-color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    header img {
+      height: 60px;
+      transition: height 0.3s;
+    }
+    .menu-btn {
+      font-size: 26px;
+      cursor: pointer;
+    }
+    .menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100%;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: right 0.3s;
+      z-index: 999;
+    }
+    .menu.active {
+      right: 0;
+    }
+    .menu a {
+      font-size: 24px;
+      margin: 20px;
+      color: #000;
+      text-decoration: none;
+    }
+    .lang-switcher {
+      position: absolute;
+      bottom: 20px;
+      text-align: center;
+    }
+    .lang-switcher button {
+      margin: 0 5px;
+      padding: 5px 10px;
+    }
+  </style>
 </head>
-
 <body>
-
- <header>
-
-   <a href="#"><img id="logo" src="foto1.PNG" alt="Logo ElectroPlan" /></a>
-
-   <div class="menu-btn" onclick="toggleMenu()">☰</div>
-
- </header>
-
- <div class="menu" id="menu">
-
-   <div onclick="toggleMenu()" style="position:absolute;top:20px;right:20px;font-size:30px;cursor:pointer;">✕</div>
-
-   <a href="#tarifs">Tarifs</a>
-
-   <a href="#aide">Aide</a>
-
-   <a href="#apropos">À propos</a>
-
-   <a href="#commander">Commander</a>
-
-   <div class="lang-switcher">
-
-     <button onclick="setLang('fr')">🇫🇷</button>
-
-     <button onclick="setLang('en')">🇬🇧</button>
-
-     <button onclick="setLang('es')">🇪🇸</button>
-
-     <button onclick="setLang('ar')">🇸🇦</button>
-
-   </div>
-
- </div>
-
- 
-
- <main style="padding-top:100px;">
-
-   <section id="intro" style="text-align:center;">
-
-     <h1>Bienvenue chez ElectroPlan</h1>
-
-     <button onclick="document.getElementById('commander').scrollIntoView({behavior:'smooth'})">Commander</button>
-
-     <div style="margin-top:20px;">
-
-       <p>✅ Prêt jusqu'à 72h</p>
-
-       <p>🔁 Modifications permises 30 jours</p>
-
-       <p>📄 Rapport PDF inclus</p>
-
-     </div>
-
-   </section>
-
- 
-
-   <!-- SECTION TARIFS -->
-
-   <section id="tarifs" style="padding:40px;text-align:center;">
-
-     <h2>Nos Tarifs</h2>
-
-     <table border="1" style="margin:auto;">
-
-       <thead>
-
-         <tr><th>Type de Schéma</th><th>Prix</th></tr>
-
-       </thead>
-
-       <tbody>
-
-         <tr><td>Unifilaire</td><td><span class="price" data-mad="280">280 MAD</span></td></tr>
-
-         <tr><td>Multifilaire</td><td><span class="price" data-mad="300">300 MAD</span></td></tr>
-
-         <tr><td>Dossier Complet</td><td><span class="price" data-mad="500">500 MAD</span></td></tr>
-
-       </tbody>
-
-     </table>
-
-     <div>
-
-       <button onclick="changeCurrency('MAD')">MAD</button>
-
-       <button onclick="changeCurrency('EUR')">EUR</button>
-
-       <button onclick="changeCurrency('AED')">AED</button>
-
-     </div>
-
-   </section>
-
- </main>
-
- 
-
- <!-- WhatsApp -->
-
- <a href="https://wa.me/212635978858" target="_blank" style="position:fixed;bottom:20px;right:20px;font-size:40px;">
-
-   <i class="fab fa-whatsapp" style="color:green;"></i>
-
- </a>
-
- 
-
- <script>
-
-   const menu = document.getElementById('menu');
-
-   function toggleMenu() {
-
-     menu.classList.toggle('active');
-
-   }
-
- 
-
-   window.addEventListener('scroll', function () {
-
-     const logo = document.getElementById('logo');
-
-     if (window.scrollY > 50) {
-
-       logo.src = 'foto2.PNG';
-
-       logo.style.height = '40px';
-
-     } else {
-
-       logo.src = 'foto1.PNG';
-
-       logo.style.height = '60px';
-
-     }
-
-   });
-
- 
-
-   function changeCurrency(currency) {
-
-     const rates = { MAD: 1, EUR: 0.091, AED: 0.34 };
-
-     const prices = document.querySelectorAll('.price');
-
-     prices.forEach(p => {
-
-       const baseMAD = parseFloat(p.dataset.mad);
-
-       const converted = (baseMAD * rates[currency]).toFixed(2);
-
-       p.innerText = `${converted} ${currency}`;
-
-     });
-
-   }
-
- </script>
-
+  <header>
+    <a href="#"><img id="logo" src="foto1.PNG" alt="Logo ElectroPlan" /></a>
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  </header>
+  <div class="menu" id="menu">
+    <div onclick="toggleMenu()" style="position:absolute;top:20px;right:20px;font-size:30px;cursor:pointer;">✕</div>
+    <a href="#tarifs">Tarifs</a>
+    <a href="#aide">Aide</a>
+    <a href="#apropos">À propos</a>
+    <a href="#commander">Commander</a>
+    <div class="lang-switcher">
+      <button onclick="setLang('fr')">🇫🇷</button>
+      <button onclick="setLang('en')">🇬🇧</button>
+      <button onclick="setLang('es')">🇪🇸</button>
+      <button onclick="setLang('ar')">🇸🇦</button>
+    </div>
+  </div>
+
+  <main style="padding-top:100px;">
+    <section id="intro" style="text-align:center;">
+      <h1>Bienvenue chez ElectroPlan</h1>
+      <button onclick="document.getElementById('commander').scrollIntoView({behavior:'smooth'})">Commander</button>
+      <div style="margin-top:20px;">
+        <p>✅ Prêt jusqu'à 72h</p>
+        <p>🔁 Modifications permises 30 jours</p>
+        <p>📄 Rapport PDF inclus</p>
+      </div>
+    </section>
+
+    <!-- SECTION TARIFS -->
+    <section id="tarifs" style="padding:40px;text-align:center;">
+      <h2>Nos Tarifs</h2>
+      <table border="1" style="margin:auto;">
+        <thead>
+          <tr><th>Type de Schéma</th><th>Prix</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Unifilaire</td><td><span class="price" data-mad="280">280 MAD</span></td></tr>
+          <tr><td>Multifilaire</td><td><span class="price" data-mad="300">300 MAD</span></td></tr>
+          <tr><td>Dossier Complet</td><td><span class="price" data-mad="500">500 MAD</span></td></tr>
+        </tbody>
+      </table>
+      <div>
+        <button onclick="changeCurrency('MAD')">MAD</button>
+        <button onclick="changeCurrency('EUR')">EUR</button>
+        <button onclick="changeCurrency('AED')">AED</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- WhatsApp -->
+  <a href="https://wa.me/212635978858" target="_blank" style="position:fixed;bottom:20px;right:20px;font-size:40px;">
+    <i class="fab fa-whatsapp" style="color:green;"></i>
+  </a>
+
+  <script>
+    const menu = document.getElementById('menu');
+    function toggleMenu() {
+      menu.classList.toggle('active');
+    }
+
+    window.addEventListener('scroll', function () {
+      const logo = document.getElementById('logo');
+      if (window.scrollY > 50) {
+        logo.src = 'foto2.PNG';
+        logo.style.height = '40px';
+      } else {
+        logo.src = 'foto1.PNG';
+        logo.style.height = '60px';
+      }
+    });
+
+    function changeCurrency(currency) {
+      const rates = { MAD: 1, EUR: 0.091, AED: 0.34 };
+      const prices = document.querySelectorAll('.price');
+      prices.forEach(p => {
+        const baseMAD = parseFloat(p.dataset.mad);
+        const converted = (baseMAD * rates[currency]).toFixed(2);
+        p.innerText = `${converted} ${currency}`;
+      });
+    }
+  </script>
 </body>
-
 </html>
+"

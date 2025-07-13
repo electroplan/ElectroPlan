@@ -301,10 +301,10 @@ nav button {
     <p>&copy; 2025 ElectroPlan - Tous droits réservés</p>
   </footer>
 
-  <script>
-    function toggleMenu() {
-      .menu-toggle {
-  display: none;
+ <script>
+function toggleMenu() {
+  const menu = document.getElementById("mobileMenu");
+  menu.classList.toggle("show");
 }
 @media (max-width: 768px) {
   .menu-toggle {

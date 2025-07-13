@@ -4,135 +4,100 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Commander - ElectroPlan</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --main-blue: #003366;
-      --accent-orange: #ff6b00;
-    }
-
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #f4f4f4;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f2f2;
     }
 
     header {
-      background-color: white;
+      background: white;
+      padding: 10px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     header img {
       height: 50px;
     }
 
-    .btn-retour {
-      background-color: var(--main-blue);
-      color: white;
-      padding: 10px 18px;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: 600;
-      transition: background 0.3s;
-    }
-
-    .btn-retour:hover {
-      background-color: #002244;
-    }
-
-    .banniere {
-      background-image: url('commande.png.PNG');
-      background-size: cover;
-      background-position: center;
-      height: 360px;
-      position: relative;
+    .banner {
+      background: url('banniere.jpg') center/cover no-repeat;
+      height: 250px;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    .banniere::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-    }
-
-    .banniere h1 {
-      position: relative;
       color: white;
-      font-size: 36px;
-      z-index: 2;
+      font-size: 2em;
+      font-weight: bold;
+      text-shadow: 1px 1px 4px #000;
       text-align: center;
-      padding: 20px;
     }
 
-    .form-container {
-      background-color: white;
-      max-width: 500px;
-      margin: -70px auto 50px;
-      padding: 35px 30px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-      position: relative;
-      z-index: 5;
+    .container {
+      background: white;
+      max-width: 600px;
+      margin: -50px auto 30px;
+      padding: 30px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
     }
 
     h2 {
       text-align: center;
-      color: var(--main-blue);
-      margin-bottom: 25px;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
     }
 
     label {
-      display: block;
-      margin-top: 18px;
-      font-weight: 600;
-      color: #333;
+      margin: 10px 0 5px;
     }
 
     input, select, textarea {
-      width: 100%;
-      padding: 12px;
-      margin-top: 8px;
+      padding: 10px;
+      border-radius: 4px;
       border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 15px;
-      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
     }
 
     button {
-      margin-top: 25px;
-      width: 100%;
-      background-color: var(--accent-orange);
+      margin-top: 20px;
+      background: #0073e6;
       color: white;
-      padding: 14px;
       border: none;
-      border-radius: 8px;
-      font-weight: bold;
+      padding: 12px;
       font-size: 16px;
+      border-radius: 5px;
       cursor: pointer;
-      transition: background 0.3s;
     }
 
     button:hover {
-      background-color: #e65c00;
+      background: #005bb5;
+    }
+
+    .back-home {
+      display: block;
+      margin: 20px auto 0;
+      text-align: center;
+      text-decoration: none;
+      color: #0073e6;
     }
 
     @media (max-width: 600px) {
-      .form-container {
-        margin: -50px 20px 40px;
-        padding: 25px 20px;
+      .banner {
+        font-size: 1.5em;
+        height: 200px;
       }
-      .banniere h1 {
-        font-size: 24px;
+
+      .container {
+        margin: -40px 10px 30px;
       }
     }
   </style>
@@ -140,42 +105,55 @@
 <body>
 
   <header>
-    <a href="index.html">
-      <img src="logo.png" alt="Logo ElectroPlan">
-    </a>
-    <a class="btn-retour" href="index.html">← Retour à l’accueil</a>
+    <a href="index.html"><img src="foto1.PNG" alt="Logo ElectroPlan"></a>
   </header>
 
-  <div class="banniere">
-    <h1>Formulaire de commande</h1>
+  <div class="banner">
+    Commande de plan électrique
   </div>
 
-  <div class="form-container">
-    <form action="https://wa.me/212635978858" method="get" target="_blank">
+  <div class="container">
+    <h2>Formulaire de commande</h2>
+    <form id="orderForm" onsubmit="sendToWhatsApp(); return false;">
       <label for="nom">Nom complet :</label>
       <input type="text" id="nom" name="nom" required>
 
-      <label for="telephone">Numéro de téléphone :</label>
-      <input type="tel" id="telephone" name="telephone" required>
+      <label for="tel">Téléphone :</label>
+      <input type="tel" id="tel" name="tel" required>
 
-      <label for="type">Type de logement :</label>
-      <select id="type" name="type" required>
-        <option value="villa">Villa</option>
-        <option value="appartement">Appartement</option>
-        <option value="bureau">Bureau</option>
-        <option value="terrain">Terrain</option>
-        <option value="autres">Autres</option>
+      <label for="logement">Type de logement :</label>
+      <select id="logement" name="logement">
+        <option value="Villa">Villa</option>
+        <option value="Appartement">Appartement</option>
+        <option value="Bureau">Bureau</option>
+        <option value="Autres">Autres</option>
       </select>
 
-      <label for="superficie">Combien de m² :</label>
-      <input type="number" id="superficie" name="superficie" placeholder="ex: 100" required>
+      <label for="superficie">Surface en m² :</label>
+      <input type="number" id="superficie" name="superficie" required>
 
-      <label for="message">Message :</label>
-      <textarea id="message" name="message" rows="4" placeholder="Détails supplémentaires..."></textarea>
+      <label for="message">Message ou demandes spécifiques :</label>
+      <textarea id="message" name="message" rows="4"></textarea>
 
       <button type="submit">Envoyer via WhatsApp</button>
     </form>
+
+    <a class="back-home" href="index.html">← Retour à l’accueil</a>
   </div>
+
+  <script>
+    function sendToWhatsApp() {
+      const nom = document.getElementById("nom").value;
+      const tel = document.getElementById("tel").value;
+      const logement = document.getElementById("logement").value;
+      const superficie = document.getElementById("superficie").value;
+      const message = document.getElementById("message").value;
+
+      const texte = `Nouvelle commande :\n\n👤 Nom : ${nom}\n📞 Téléphone : ${tel}\n🏠 Logement : ${logement}\n📏 Surface : ${superficie} m²\n📝 Message : ${message}`;
+      const url = `https://wa.me/212635978858?text=${encodeURIComponent(texte)}`;
+      window.open(url, "_blank");
+    }
+  </script>
 
 </body>
 </html>

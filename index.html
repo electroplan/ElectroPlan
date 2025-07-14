@@ -206,20 +206,51 @@ nav button {
 </head>
 <body>
 
+  }
+}
  <!-- MENU HAMBURGER COMPLET -->
 <header>
-  <a href="index.html"><img src="foto1.PNG" id="logo" alt="Logo ElectroPlan" /></a>
+  <header>
+  <a href="index.html"><img src="foto1.PNG" id="logo" alt="ElectroPlan Logo" /></a>
   <button class="menu-toggle" onclick="toggleMenu()">
     <i class="fas fa-bars"></i>
   </button>
 </header>
 
 <nav id="mobileMenu">
-  <button onclick="toggleMenu()"><i class="fas fa-times"></i></button>
+  <button onclick="toggleMenu()" class="close-btn">
+    <i class="fas fa-times"></i>
+  </button>
   <a href="index.html" onclick="toggleMenu()">Accueil</a>
-  <a href="index.html#tarifs" onclick="toggleMenu()">Nos Tarifs</a>
-  <a href="index.html#apropos" onclick="toggleMenu()">À propos</a>
-  <a href="index.html#aide" onclick="toggleMenu()">Aide</a>
+  <a href="#tarifs" onclick="toggleMenu()">Nos Packs</a>
+  <a href="#apropos" onclick="toggleMenu()">À propos</a>
+  <a href="#aide" onclick="toggleMenu()">Aide</a>
+  <a href="info.html" onclick="toggleMenu()">Informations</a>
+  <a href="commande.html" onclick="toggleMenu()">Commander</a>
+
+  <div class="lang-switcher">
+    <select onchange="changeLanguage(this.value)">
+      <option value="fr">Français</option>
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="ar">عربي</option>
+    </select>
+  </div>
+</nav>
+  <a href="index.html"><img src="foto1.PNG" id="logo" alt="ElectroPlan Logo" /></a>
+  <button class="menu-toggle" onclick="toggleMenu()">
+    <i class="fas fa-bars"></i>
+  </button>
+</header>
+
+<nav id="mobileMenu">
+  <button onclick="toggleMenu()" class="close-btn">
+    <i class="fas fa-times"></i>
+  </button>
+  <a href="index.html" onclick="toggleMenu()">Accueil</a>
+  <a href="#tarifs" onclick="toggleMenu()">Nos Packs</a>
+  <a href="#apropos" onclick="toggleMenu()">À propos</a>
+  <a href="#aide" onclick="toggleMenu()">Aide</a>
   <a href="info.html" onclick="toggleMenu()">Informations</a>
   <a href="commande.html" onclick="toggleMenu()">Commander</a>
 

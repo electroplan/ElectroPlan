@@ -6,25 +6,28 @@
   <title>ElectroPlan</title>
   <script src="https://kit.fontawesome.com/a2d9d5cfd3.js" crossorigin="anonymous"></script>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Segoe UI', sans-serif; background: #f7f9fc; }
-
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f7f9fc;
+    }
     header {
       position: fixed;
       top: 0;
       left: 0;
+      background: white;
       width: 100%;
-      background: #fff;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       z-index: 1000;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 10px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
-
-    header img { height: 50px; transition: 0.3s ease; }
-
+    header img {
+      height: 50px;
+      transition: 0.3s;
+    }
     .menu-toggle {
       font-size: 26px;
       background: none;
@@ -33,60 +36,45 @@
       cursor: pointer;
       display: none;
     }
-
     nav {
       position: fixed;
+      background: white;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: white;
       z-index: 999;
-      display: flex;
+      display: none;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      transform: translateY(-100%);
-      opacity: 0;
-      transition: all 0.3s ease-in-out;
-      pointer-events: none;
+      justify-content: center;
     }
-
     nav.show {
-      transform: translateY(0);
-      opacity: 1;
-      pointer-events: auto;
+      display: flex;
     }
-
     nav a {
-      text-decoration: none;
-      font-size: 20px;
       margin: 15px 0;
-      color: #333;
+      font-size: 20px;
+      color: #004080;
+      text-decoration: none;
     }
-
     nav button {
       position: absolute;
-      top: 20px;
+      top: 15px;
       right: 20px;
-      font-size: 30px;
-      border: none;
+      font-size: 28px;
       background: none;
+      border: none;
       color: #004080;
     }
-
     .lang-switcher {
       position: absolute;
       bottom: 30px;
-      width: 100%;
-      text-align: center;
     }
-
     .lang-switcher select {
-      padding: 10px;
       font-size: 16px;
+      padding: 8px;
     }
-
     .hero {
       padding-top: 100px;
       background: linear-gradient(to right, #004080, #0073e6);
@@ -94,9 +82,6 @@
       text-align: center;
       padding-bottom: 60px;
     }
-
-    .hero h1 { margin: 0; font-size: 2.5em; }
-    .hero p { font-size: 1.2em; }
     .hero .cta {
       margin-top: 20px;
       background: yellow;
@@ -107,60 +92,182 @@
       border-radius: 5px;
       text-decoration: none;
     }
-
     .features {
       display: flex;
       justify-content: space-around;
       background: #fff;
       padding: 40px 10px;
       text-align: center;
+      flex-wrap: wrap;
     }
-
     .features div {
       flex: 1;
+      min-width: 200px;
       margin: 10px;
     }
-
     .features i {
       font-size: 2em;
       color: #0073e6;
       margin-bottom: 10px;
     }
-
     section {
       padding: 40px 20px;
       max-width: 1000px;
       margin: auto;
     }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
+    .pack {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 20px 0;
     }
-
-    table th, table td {
-      border: 1px solid #ccc;
-      padding: 12px;
-      text-align: center;
+    .pack h3 {
+      margin-top: 0;
+      color: #004080;
     }
-
-    table th {
-      background: #0073e6;
-      color: white;
-    }
-
     footer {
       background: #004080;
       color: white;
       text-align: center;
       padding: 20px;
     }
-
     @media (max-width: 768px) {
-      .features { flex-direction: column; }
-      .menu-toggle { display: block; }
+      .menu-toggle {
+        display: block;
+      }
     }
   </style>
 </head>
 <body>
+
+<header>
+  <a href="index.html"><img src="foto1.PNG" id="logo" alt="Logo ElectroPlan" /></a>
+  <button class="menu-toggle" onclick="toggleMenu()">
+    <i class="fas fa-bars"></i>
+  </button>
+</header>
+
+<nav id="mobileMenu">
+  <button onclick="toggleMenu()"><i class="fas fa-times"></i></button>
+  <a href="#accueil" onclick="toggleMenu()">Accueil</a>
+  <a href="#tarifs" onclick="toggleMenu()">Nos Packs</a>
+  <a href="#apropos" onclick="toggleMenu()">À propos</a>
+  <a href="#aide" onclick="toggleMenu()">Aide</a>
+  <a href="info.html" onclick="toggleMenu()">Informations</a>
+  <a href="commande.html" onclick="toggleMenu()">Commander</a>
+  <div class="lang-switcher">
+    <select onchange="changeLanguage(this.value)">
+      <option value="fr">Français</option>
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="ar">عربي</option>
+    </select>
+  </div>
+</nav>
+
+<section class="hero" id="accueil">
+  <h1 data-i18n="welcome">Bienvenue sur ElectroPlan</h1>
+  <p data-i18n="slogan">Des plans électriques professionnels avec visualisation 2D/3D</p>
+  <a href="commande.html" class="cta" data-i18n="commander">Commander</a>
+</section>
+
+<div class="features">
+  <div><i class="fas fa-clock"></i><p data-i18n="ready72h">Prêt jusqu’à 72h</p></div>
+  <div><i class="fas fa-edit"></i><p data-i18n="mod30j">Modifications jusqu’à 30 jours</p></div>
+  <div><i class="fas fa-file-pdf"></i><p data-i18n="withpdf">Avec rapports PDF</p></div>
+</div>
+
+<section id="tarifs">
+  <h2 data-i18n="nos_packs">Nos Packs</h2>
+  <p data-i18n="packs_intro">Choisissez parmi nos packs détaillés pour répondre à vos besoins électriques.</p>
+
+  <div class="pack">
+    <h3 data-i18n="pack_decor">Plan Décor électrique (par pièce)</h3>
+    <p data-i18n="pack_decor_desc">Visualisation 2D + 3D, liste de matériel dimensionné, rapport PDF légal</p>
+    <strong>300 MAD</strong>
+  </div>
+
+  <div class="pack">
+    <h3 data-i18n="pack_uni">Plan Unifilaire</h3>
+    <p data-i18n="pack_uni_desc">Logement / Villa / Terrain, liste de matériel dimensionné, rapport PDF légal</p>
+    <strong>400 MAD</strong>
+  </div>
+
+  <div class="pack">
+    <h3 data-i18n="pack_multi">Plan Multifilaire</h3>
+    <p data-i18n="pack_multi_desc">Logement / Villa / Terrain, liste de matériel dimensionné, rapport PDF légal</p>
+    <strong>600 MAD</strong>
+  </div>
+
+  <div class="pack">
+    <h3 data-i18n="pack_motor">Tableau électrique / Contrôle moteur</h3>
+    <p data-i18n="pack_motor_desc">Dessin unifilaire ou multifilaire, rapport PDF légal</p>
+    <strong>750 MAD</strong>
+  </div>
+
+  <p data-i18n="modif_info"><em>Modifications possibles pendant 30 jours après validation. 59 MAD par modification.</em></p>
+</section>
+
+<section id="apropos">
+  <h2 data-i18n="apropos">À propos</h2>
+  <p data-i18n="apropos_text">ElectroPlan vous propose des plans électriques personnalisés selon les normes internationales avec des visualisations claires et professionnelles.</p>
+</section>
+
+<section id="aide">
+  <h2 data-i18n="aide">Aide</h2>
+  <p data-i18n="aide_text">Contactez-nous via WhatsApp pour toute question ou modification.</p>
+</section>
+
+<footer>
+  <p>&copy; 2025 ElectroPlan - Tous droits réservés</p>
+</footer>
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("mobileMenu");
+  menu.classList.toggle("show");
+}
+
+window.addEventListener("scroll", function () {
+  const logo = document.getElementById("logo");
+  logo.src = window.scrollY > 50 ? "foto2.PNG" : "foto1.PNG";
+});
+
+function changeLanguage(lang) {
+  const translations = {
+    fr: {
+      welcome: "Bienvenue sur ElectroPlan",
+      slogan: "Des plans électriques professionnels avec visualisation 2D/3D",
+      commander: "Commander",
+      ready72h: "Prêt jusqu’à 72h",
+      mod30j: "Modifications jusqu’à 30 jours",
+      withpdf: "Avec rapports PDF",
+      nos_packs: "Nos Packs",
+      packs_intro: "Choisissez parmi nos packs détaillés pour répondre à vos besoins électriques.",
+      pack_decor: "Plan Décor électrique (par pièce)",
+      pack_decor_desc: "Visualisation 2D + 3D, liste de matériel dimensionné, rapport PDF légal",
+      pack_uni: "Plan Unifilaire",
+      pack_uni_desc: "Logement / Villa / Terrain, liste de matériel dimensionné, rapport PDF légal",
+      pack_multi: "Plan Multifilaire",
+      pack_multi_desc: "Logement / Villa / Terrain, liste de matériel dimensionné, rapport PDF légal",
+      pack_motor: "Tableau électrique / Contrôle moteur",
+      pack_motor_desc: "Dessin unifilaire ou multifilaire, rapport PDF légal",
+      modif_info: "Modifications possibles pendant 30 jours après validation. 59 MAD par modification.",
+      apropos: "À propos",
+      apropos_text: "ElectroPlan vous propose des plans électriques personnalisés selon les normes internationales avec des visualisations claires et professionnelles.",
+      aide: "Aide",
+      aide_text: "Contactez-nous via WhatsApp pour toute question ou modification.",
+    },
+    // Ajoute ici "en", "es", "ar" comme dans les exemples précédents si tu veux traduire aussi
+  };
+
+  const trans = translations[lang];
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const key = el.getAttribute("data-i18n");
+    el.textContent = trans[key] || el.textContent;
+  });
+}
+</script>
+</body>
+</html>

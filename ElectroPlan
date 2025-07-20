@@ -1,0 +1,7 @@
+ElectroPlan/
+├── index.html          ← page d'accueil (avec menu hamburger, packs, etc.)
+├── commande.html       ← page de commande avec formulaire
+├── info.html           ← page d'infos techniques
+├── foto1.PNG           ← logo principal
+├── foto2.PNG           ← logo scroll
+├── commande.PNG        ← image de fond de la page commande (bannière)

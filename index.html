@@ -14,16 +14,16 @@
 
     header {
       position: fixed;
-      width: 100%;
       top: 0;
       left: 0;
+      width: 100%;
       background: white;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       z-index: 999;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 10px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
     header img {
@@ -32,7 +32,7 @@
     }
 
     .menu-toggle {
-      font-size: 24px;
+      font-size: 26px;
       background: none;
       border: none;
       color: #004080;
@@ -40,39 +40,57 @@
       display: none;
     }
 
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
-    }
-
-    nav#mobileMenu {
-      display: none;
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      position: fixed;
-      background: white;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: 0.3s ease-in-out;
       z-index: 998;
+      pointer-events: none;
     }
 
-    nav#mobileMenu.show {
-      display: flex;
+    nav.show {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
     }
 
-    nav#mobileMenu a {
+    nav a {
       font-size: 20px;
-      margin: 15px 0;
-      color: #004080;
+      color: #333;
       text-decoration: none;
+      margin: 20px 0;
+    }
+
+    nav button {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 30px;
+      background: none;
+      border: none;
+      color: #004080;
     }
 
     .lang-switcher {
-      margin-top: 30px;
+      position: absolute;
+      bottom: 30px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .lang-switcher select {
+      padding: 10px;
+      font-size: 16px;
     }
 
     .hero {
@@ -81,6 +99,15 @@
       color: white;
       text-align: center;
       padding-bottom: 60px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+
+    .hero p {
+      font-size: 1.2em;
     }
 
     .hero .cta {
@@ -125,7 +152,8 @@
       margin-top: 20px;
     }
 
-    table th, table td {
+    table th,
+    table td {
       border: 1px solid #ccc;
       padding: 12px;
       text-align: center;
@@ -147,187 +175,179 @@
       .features {
         flex-direction: column;
       }
+      .menu-toggle {
+        display: block;
+      }
     }
   </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-  <a href="index.html"><img src="foto1.PNG" id="logo" alt="Logo ElectroPlan" /></a>
-  <button class="menu-toggle" onclick="toggleMenu()">
-    <i class="fas fa-bars"></i>
-  </button>
-</header>
+  <header>
+    <a href="index.html"><img src="foto1.PNG" id="logo" alt="ElectroPlan Logo" /></a>
+    <button class="menu-toggle" onclick="toggleMenu()">
+      <i class="fas fa-bars"></i>
+    </button>
+  </header>
 
-<!-- MENU MOBILE -->
-<nav id="mobileMenu">
-  <button onclick="toggleMenu()" class="close-btn"><i class="fas fa-times"></i></button>
-  <a href="#accueil" onclick="toggleMenu()">Accueil</a>
-  <a href="#tarifs" onclick="toggleMenu()">Nos Packs</a>
-  <a href="#apropos" onclick="toggleMenu()">À propos</a>
-  <a href="#aide" onclick="toggleMenu()">Aide</a>
-  <a href="info.html" onclick="toggleMenu()">Informations</a>
-  <a href="commande.html" onclick="toggleMenu()">Commander</a>
+  <nav id="mobileMenu">
+    <button onclick="toggleMenu()"><i class="fas fa-times"></i></button>
+    <a href="index.html" onclick="toggleMenu()">Accueil</a>
+    <a href="#tarifs" onclick="toggleMenu()">Nos Packs</a>
+    <a href="#apropos" onclick="toggleMenu()">À propos</a>
+    <a href="#aide" onclick="toggleMenu()">Aide</a>
+    <a href="info.html" onclick="toggleMenu()">Informations</a>
+    <a href="commande.html" onclick="toggleMenu()">Commander</a>
+    <div class="lang-switcher">
+      <select onchange="changeLanguage(this.value)">
+        <option value="fr">Français</option>
+        <option value="en">English</option>
+        <option value="es">Español</option>
+        <option value="ar">عربي</option>
+      </select>
+    </div>
+  </nav>
 
-  <div class="lang-switcher">
-    <select onchange="changeLanguage(this.value)">
-      <option value="fr">Français</option>
-      <option value="en">English</option>
-      <option value="es">Español</option>
-      <option value="ar">عربي</option>
+  <section class="hero" id="accueil">
+    <h1 data-i18n="welcome">Bienvenue sur ElectroPlan</h1>
+    <p data-i18n="slogan">Des plans électriques professionnels avec visualisation 2D/3D</p>
+    <a href="#tarifs" class="cta" data-i18n="commander">Voir nos packs</a>
+  </section>
+
+  <div class="features">
+    <div>
+      <i class="fas fa-clock"></i>
+      <p data-i18n="ready72h">Prêt jusqu’à 72h</p>
+    </div>
+    <div>
+      <i class="fas fa-edit"></i>
+      <p data-i18n="mod30j">Modifications permises jusqu’à 30 jours</p>
+    </div>
+    <div>
+      <i class="fas fa-file-pdf"></i>
+      <p data-i18n="withpdf">Avec rapports PDF</p>
+    </div>
+  </div>
+
+  <section id="tarifs">
+    <h2 data-i18n="tarifs">Nos Packs</h2>
+    <label for="currency">Devise :</label>
+    <select id="currency" onchange="updatePrices()">
+      <option value="MAD">MAD</option>
+      <option value="EUR">EUR</option>
+      <option value="AED">AED</option>
     </select>
-  </div>
-</nav>
+    <table>
+      <thead>
+        <tr>
+          <th data-i18n="type_schema">Type de pack</th>
+          <th data-i18n="prix">Prix</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-i18n="pack1">Plan décor électrique par pièce (2D/3D + liste)</td>
+          <td class="price" data-base="300">300 MAD</td>
+        </tr>
+        <tr>
+          <td data-i18n="pack2">Plan unifilaire avec rapport PDF</td>
+          <td class="price" data-base="450">450 MAD</td>
+        </tr>
+        <tr>
+          <td data-i18n="pack3">Plan multifilaire complet</td>
+          <td class="price" data-base="600">600 MAD</td>
+        </tr>
+        <tr>
+          <td data-i18n="pack4">Tableau électrique / contrôle moteur</td>
+          <td class="price" data-base="750">750 MAD</td>
+        </tr>
+      </tbody>
+    </table>
+    <p><strong>Modifications : </strong>59 DH par validation dans les 30 jours</p>
+  </section>
 
-<!-- HERO -->
-<section class="hero" id="accueil">
-  <h1 data-i18n="welcome">Bienvenue sur ElectroPlan</h1>
-  <p data-i18n="slogan">Des plans électriques professionnels avec visualisation 2D/3D</p>
-  <a href="commande.html" class="cta" data-i18n="commander">Commander</a>
-</section>
+  <section id="apropos">
+    <h2 data-i18n="apropos">À propos</h2>
+    <p data-i18n="apropos_text">ElectroPlan vous propose des plans électriques sur mesure avec un accompagnement personnalisé et des outils 2D/3D professionnels.</p>
+  </section>
 
-<!-- FEATURES -->
-<div class="features">
-  <div>
-    <i class="fas fa-clock"></i>
-    <p data-i18n="ready72h">Prêt jusqu’à 72h</p>
-  </div>
-  <div>
-    <i class="fas fa-edit"></i>
-    <p data-i18n="mod30j">Modifications permises jusqu’à 30 jours</p>
-  </div>
-  <div>
-    <i class="fas fa-file-pdf"></i>
-    <p data-i18n="withpdf">Avec rapports PDF</p>
-  </div>
-</div>
+  <section id="aide">
+    <h2 data-i18n="aide">Aide</h2>
+    <p data-i18n="aide_text">Nous sommes disponibles par message ou appel WhatsApp pour vous assister dans vos projets.</p>
+  </section>
 
-<!-- TARIFS -->
-<section id="tarifs">
-  <h2 data-i18n="tarifs">Nos Packs</h2>
-  <label for="currency">Devise :</label>
-  <select id="currency" onchange="updatePrices()">
-    <option value="MAD">MAD</option>
-    <option value="EUR">EUR</option>
-    <option value="AED">AED</option>
-  </select>
+  <footer>
+    <p>&copy; 2025 ElectroPlan - Tous droits réservés</p>
+  </footer>
 
-  <table>
-    <thead>
-      <tr>
-        <th data-i18n="type_schema">Type de Pack</th>
-        <th data-i18n="prix">Prix</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td data-i18n="pack1">Plan Décord électrique (pièce)</td>
-        <td class="price" data-base="300">300 MAD</td>
-      </tr>
-      <tr>
-        <td data-i18n="pack2">Plan Unifilaire (logement / villa)</td>
-        <td class="price" data-base="450">450 MAD</td>
-      </tr>
-      <tr>
-        <td data-i18n="pack3">Plan Multifilaire (logement / villa)</td>
-        <td class="price" data-base="600">600 MAD</td>
-      </tr>
-      <tr>
-        <td data-i18n="pack4">Plan tableau / contrôle moteur</td>
-        <td class="price" data-base="750">750 MAD</td>
-      </tr>
-    </tbody>
-  </table>
-</section>
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById("mobileMenu");
+      menu.classList.toggle("show");
+    }
 
-<!-- À PROPOS -->
-<section id="apropos">
-  <h2 data-i18n="apropos">À propos</h2>
-  <p data-i18n="apropos_text">ElectroPlan vous propose des plans électriques personnalisés selon les normes internationales avec des visualisations claires et professionnelles.</p>
-</section>
-
-<!-- AIDE -->
-<section id="aide">
-  <h2 data-i18n="aide">Aide</h2>
-  <p data-i18n="aide_text">Assistance personnalisée via téléphone ou WhatsApp. Modifications possibles 30 jours après confirmation (59 DH/modification).</p>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <p>&copy; 2025 ElectroPlan - Tous droits réservés</p>
-</footer>
-
-<!-- SCRIPTS -->
-<script>
-  function toggleMenu() {
-    const menu = document.getElementById("mobileMenu");
-    menu.classList.toggle("show");
-  }
-
-  window.addEventListener("scroll", function () {
-    const logo = document.getElementById("logo");
-    logo.src = window.scrollY > 50 ? "foto2.PNG" : "foto1.PNG";
-  });
-
-  function updatePrices() {
-    const currency = document.getElementById("currency").value;
-    const rates = { MAD: 1, EUR: 0.091, AED: 0.36 };
-    document.querySelectorAll(".price").forEach((el) => {
-      const base = parseFloat(el.getAttribute("data-base"));
-      const converted = Math.round(base * rates[currency]);
-      el.textContent = `${converted} ${currency}`;
+    window.addEventListener("scroll", function () {
+      const logo = document.getElementById("logo");
+      logo.src = window.scrollY > 50 ? "foto2.PNG" : "foto1.PNG";
     });
-  }
 
-  function changeLanguage(lang) {
-    const translations = {
-      fr: {
-        welcome: "Bienvenue sur ElectroPlan",
-        slogan: "Des plans électriques professionnels avec visualisation 2D/3D",
-        commander: "Commander",
-        ready72h: "Prêt jusqu’à 72h",
-        mod30j: "Modifications permises jusqu’à 30 jours",
-        withpdf: "Avec rapports PDF",
-        tarifs: "Nos Packs",
-        type_schema: "Type de Pack",
-        prix: "Prix",
-        pack1: "Plan Décord électrique (pièce)",
-        pack2: "Plan Unifilaire (logement / villa)",
-        pack3: "Plan Multifilaire (logement / villa)",
-        pack4: "Plan tableau / contrôle moteur",
-        apropos: "À propos",
-        apropos_text: "ElectroPlan vous propose des plans électriques personnalisés selon les normes internationales avec des visualisations claires et professionnelles.",
-        aide: "Aide",
-        aide_text: "Assistance personnalisée via téléphone ou WhatsApp. Modifications possibles 30 jours après confirmation (59 DH/modification)."
-      },
-      en: {
-        welcome: "Welcome to ElectroPlan",
-        slogan: "Professional electrical plans with 2D/3D visuals",
-        commander: "Order Now",
-        ready72h: "Ready within 72h",
-        mod30j: "Changes allowed for 30 days",
-        withpdf: "With PDF reports",
-        tarifs: "Our Packs",
-        type_schema: "Pack Type",
-        prix: "Price",
-        pack1: "Electric decor plan (per room)",
-        pack2: "Single-line plan (home/villa)",
-        pack3: "Multi-line plan (home/villa)",
-        pack4: "Panel or motor control plan",
-        apropos: "About",
-        apropos_text: "ElectroPlan offers customized electrical plans with professional 2D/3D visuals and compliance to international standards.",
-        aide: "Help",
-        aide_text: "Support via WhatsApp or phone. Changes allowed within 30 days after confirmation (59 DH/change)."
-      }
-    };
+    function updatePrices() {
+      const currency = document.getElementById("currency").value;
+      const rates = { MAD: 1, EUR: 0.091, AED: 0.36 };
+      document.querySelectorAll(".price").forEach((el) => {
+        const base = parseFloat(el.getAttribute("data-base"));
+        const converted = Math.round(base * rates[currency]);
+        el.textContent = `${converted} ${currency}`;
+      });
+    }
 
-    const trans = translations[lang];
-    document.querySelectorAll("[data-i18n]").forEach((el) => {
-      const key = el.getAttribute("data-i18n");
-      el.textContent = trans[key] || el.textContent;
-    });
-  }
-</script>
+    function changeLanguage(lang) {
+      const translations = {
+        fr: {
+          welcome: "Bienvenue sur ElectroPlan",
+          slogan: "Des plans électriques professionnels avec visualisation 2D/3D",
+          commander: "Voir nos packs",
+          ready72h: "Prêt jusqu’à 72h",
+          mod30j: "Modifications permises jusqu’à 30 jours",
+          withpdf: "Avec rapports PDF",
+          tarifs: "Nos Packs",
+          type_schema: "Type de pack",
+          prix: "Prix",
+          pack1: "Plan décor électrique par pièce (2D/3D + liste)",
+          pack2: "Plan unifilaire avec rapport PDF",
+          pack3: "Plan multifilaire complet",
+          pack4: "Tableau électrique / contrôle moteur",
+          apropos: "À propos",
+          apropos_text: "ElectroPlan vous propose des plans électriques sur mesure avec un accompagnement personnalisé et des outils 2D/3D professionnels.",
+          aide: "Aide",
+          aide_text: "Nous sommes disponibles par message ou appel WhatsApp pour vous assister dans vos projets."
+        },
+        en: {
+          welcome: "Welcome to ElectroPlan",
+          slogan: "Professional electrical plans with 2D/3D visuals",
+          commander: "See our packs",
+          ready72h: "Ready within 72h",
+          mod30j: "Changes allowed within 30 days",
+          withpdf: "With PDF reports",
+          tarifs: "Our Packs",
+          type_schema: "Pack type",
+          prix: "Price",
+          pack1: "Decorative plan per room (2D/3D + list)",
+          pack2: "Single-line plan with PDF report",
+          pack3: "Full multi-line installation",
+          pack4: "Panel drawing / motor control",
+          apropos: "About",
+          apropos_text: "ElectroPlan offers custom electrical plans with personalized support and professional 2D/3D tools.",
+          aide: "Help",
+          aide_text: "We are available via WhatsApp to assist with your projects."
+        }
+      };
+      const trans = translations[lang];
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (trans[key]) el.textContent = trans[key];
+      });
+    }
+  </script>
 </body>
 </html>

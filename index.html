@@ -6,19 +6,16 @@
   <title>ElectroPlan</title>
   <script src="https://kit.fontawesome.com/a2d9d5cfd3.js" crossorigin="anonymous"></script>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f7f9fc;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f7f9fc; }
 
     header {
       position: fixed;
-      width: 100%;
       top: 0;
       left: 0;
-      background: white;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       z-index: 1000;
       display: flex;
       justify-content: space-between;
@@ -26,13 +23,10 @@
       padding: 10px 20px;
     }
 
-    header img {
-      height: 50px;
-      transition: 0.3s;
-    }
+    header img { height: 50px; transition: 0.3s ease; }
 
     .menu-toggle {
-      font-size: 24px;
+      font-size: 26px;
       background: none;
       border: none;
       color: #004080;
@@ -41,50 +35,56 @@
     }
 
     nav {
-      display: none;
-      flex-direction: column;
       position: fixed;
-      top: 60px;
+      top: 0;
       left: 0;
       width: 100%;
+      height: 100%;
       background: white;
       z-index: 999;
-      box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: all 0.3s ease-in-out;
+      pointer-events: none;
     }
 
     nav.show {
-      display: flex;
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
     }
 
     nav a {
-      padding: 15px;
-      text-align: center;
       text-decoration: none;
+      font-size: 20px;
+      margin: 15px 0;
+      color: #333;
+    }
+
+    nav button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 30px;
+      border: none;
+      background: none;
       color: #004080;
-      border-top: 1px solid #eee;
-      font-weight: bold;
     }
 
     .lang-switcher {
-      padding: 10px;
+      position: absolute;
+      bottom: 30px;
+      width: 100%;
       text-align: center;
     }
 
     .lang-switcher select {
       padding: 10px;
       font-size: 16px;
-    }
-
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
-    }
-
-    /* Icon fix */
-    .menu-toggle i::before {
-      font-family: "Font Awesome 5 Free";
-      font-weight: 900;
     }
 
     .hero {
@@ -95,15 +95,8 @@
       padding-bottom: 60px;
     }
 
-    .hero h1 {
-      margin: 0;
-      font-size: 2.5em;
-    }
-
-    .hero p {
-      font-size: 1.2em;
-    }
-
+    .hero h1 { margin: 0; font-size: 2.5em; }
+    .hero p { font-size: 1.2em; }
     .hero .cta {
       margin-top: 20px;
       background: yellow;
@@ -140,6 +133,23 @@
       margin: auto;
     }
 
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 12px;
+      text-align: center;
+    }
+
+    table th {
+      background: #0073e6;
+      color: white;
+    }
+
     footer {
       background: #004080;
       color: white;
@@ -148,90 +158,9 @@
     }
 
     @media (max-width: 768px) {
-      .features {
-        flex-direction: column;
-      }
+      .features { flex-direction: column; }
+      .menu-toggle { display: block; }
     }
   </style>
 </head>
 <body>
-
-<header>
-  <a href="index.html"><img src="foto1.PNG" id="logo" alt="ElectroPlan Logo"></a>
-  <button class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></button>
-</header>
-
-<nav id="mobileMenu">
-  <a href="index.html" onclick="toggleMenu()">Accueil</a>
-  <a href="#tarifs" onclick="toggleMenu()">Nos Packs</a>
-  <a href="#apropos" onclick="toggleMenu()">À propos</a>
-  <a href="#aide" onclick="toggleMenu()">Aide</a>
-  <a href="info.html" onclick="toggleMenu()">Informations</a>
-  <a href="commande.html" onclick="toggleMenu()">Commander</a>
-  <div class="lang-switcher">
-    <select onchange="changeLanguage(this.value)">
-      <option value="fr">Français</option>
-      <option value="en">English</option>
-      <option value="es">Español</option>
-      <option value="ar">عربي</option>
-    </select>
-  </div>
-</nav>
-
-<section class="hero" id="accueil">
-  <h1 data-i18n="welcome">Bienvenue sur ElectroPlan</h1>
-  <p data-i18n="slogan">Des plans électriques professionnels avec visualisation 2D/3D</p>
-  <a href="commande.html" class="cta" data-i18n="commander">Commander</a>
-</section>
-
-<div class="features">
-  <div>
-    <i class="fas fa-clock"></i>
-    <p data-i18n="ready72h">Prêt jusqu’à 72h</p>
-  </div>
-  <div>
-    <i class="fas fa-edit"></i>
-    <p data-i18n="mod30j">Modifications permises jusqu’à 30 jours</p>
-  </div>
-  <div>
-    <i class="fas fa-file-pdf"></i>
-    <p data-i18n="withpdf">Avec rapports PDF</p>
-  </div>
-</div>
-
-<!-- Autres sections ici (packs, tarifs, à propos, etc.) -->
-
-<footer>
-  <p>&copy; 2025 ElectroPlan - Tous droits réservés</p>
-</footer>
-
-<script>
-  function toggleMenu() {
-    const menu = document.getElementById("mobileMenu");
-    menu.classList.toggle("show");
-  }
-
-  window.addEventListener("scroll", function () {
-    const logo = document.getElementById("logo");
-    if (logo) {
-      logo.src = window.scrollY > 50 ? "foto2.PNG" : "foto1.PNG";
-    }
-  });
-
-  function changeLanguage(lang) {
-    const translations = {
-      fr: { welcome: "Bienvenue sur ElectroPlan", slogan: "Des plans électriques professionnels avec visualisation 2D/3D", commander: "Commander", ready72h: "Prêt jusqu’à 72h", mod30j: "Modifications permises jusqu’à 30 jours", withpdf: "Avec rapports PDF" },
-      en: { welcome: "Welcome to ElectroPlan", slogan: "Professional electrical plans with 2D/3D visualizations", commander: "Order Now", ready72h: "Ready within 72h", mod30j: "Changes allowed up to 30 days", withpdf: "With PDF reports" },
-      es: { welcome: "Bienvenido a ElectroPlan", slogan: "Planes eléctricos profesionales con visualización 2D/3D", commander: "Ordenar", ready72h: "Listo en 72h", mod30j: "Cambios permitidos hasta 30 días", withpdf: "Con informes en PDF" },
-      ar: { welcome: "مرحبًا بكم في ElectroPlan", slogan: "خطط كهربائية احترافية مع تصور 2D و3D", commander: "اطلب الآن", ready72h: "جاهز خلال 72 ساعة", mod30j: "تعديلات مسموحة لمدة 30 يومًا", withpdf: "مع تقارير PDF" }
-    };
-    const trans = translations[lang];
-    document.querySelectorAll("[data-i18n]").forEach((el) => {
-      const key = el.getAttribute("data-i18n");
-      el.textContent = trans[key] || el.textContent;
-    });
-  }
-</script>
-
-</body>
-</html>
